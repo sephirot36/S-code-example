@@ -15,6 +15,9 @@
 		141580CA23E6CF1F009F9218 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 141580C823E6CF1F009F9218 /* LaunchScreen.storyboard */; };
 		141580D523E6CF1F009F9218 /* seat_codeTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580D423E6CF1F009F9218 /* seat_codeTests.swift */; };
 		141580E023E6CF1F009F9218 /* seat_codeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580DF23E6CF1F009F9218 /* seat_codeUITests.swift */; };
+		141580F123E6DC6E009F9218 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F023E6DC6E009F9218 /* Trip.swift */; };
+		141580F323E6E37B009F9218 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F223E6E37B009F9218 /* Stop.swift */; };
+		141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F423E6E3B7009F9218 /* MapPoint.swift */; };
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
@@ -52,6 +55,9 @@
 		141580DB23E6CF1F009F9218 /* seat-codeUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "seat-codeUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		141580DF23E6CF1F009F9218 /* seat_codeUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = seat_codeUITests.swift; sourceTree = "<group>"; };
 		141580E123E6CF1F009F9218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		141580F023E6DC6E009F9218 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
+		141580F223E6E37B009F9218 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
+		141580F423E6E3B7009F9218 /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		33B1F74E84A33902E41B9D3A /* Pods-seat-codeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.release.xcconfig"; sourceTree = "<group>"; };
 		40087BAB39A5296257128430 /* Pods-seat-codeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2BE8622AB3682129542829 /* Pods-seat-code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.debug.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.debug.xcconfig"; sourceTree = "<group>"; };
@@ -178,6 +184,9 @@
 		141580EF23E6D13E009F9218 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				141580F023E6DC6E009F9218 /* Trip.swift */,
+				141580F223E6E37B009F9218 /* Stop.swift */,
+				141580F423E6E3B7009F9218 /* MapPoint.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -413,9 +422,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				141580F123E6DC6E009F9218 /* Trip.swift in Sources */,
 				141580BF23E6CF1C009F9218 /* MainViewController.swift in Sources */,
+				141580F323E6E37B009F9218 /* Stop.swift in Sources */,
 				141580C523E6CF1D009F9218 /* seat_code.xcdatamodeld in Sources */,
 				141580BD23E6CF1C009F9218 /* AppDelegate.swift in Sources */,
+				141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
