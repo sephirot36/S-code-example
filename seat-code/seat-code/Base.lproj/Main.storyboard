@@ -19,16 +19,24 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8KA-rn-sj9" customClass="GMSMapView">
-                                <rect key="frame" x="0.0" y="44" width="414" height="818"/>
+                                <rect key="frame" x="0.0" y="44" width="414" height="362"/>
                                 <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </view>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="bck-LK-uYC">
+                                <rect key="frame" x="0.0" y="414" width="414" height="448"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                            </tableView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="8KA-rn-sj9" secondAttribute="bottom" id="653-MT-jBN"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="8KA-rn-sj9" secondAttribute="trailing" id="6Ft-ir-jPX"/>
+                            <constraint firstItem="bck-LK-uYC" firstAttribute="top" secondItem="8KA-rn-sj9" secondAttribute="bottom" constant="8" id="8f8-S8-ojO"/>
                             <constraint firstItem="8KA-rn-sj9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="EPT-6w-imj"/>
                             <constraint firstItem="8KA-rn-sj9" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="Ri0-QH-5hx"/>
+                            <constraint firstItem="bck-LK-uYC" firstAttribute="height" secondItem="8bC-Xf-vdC" secondAttribute="height" multiplier="0.5" id="XC0-Do-Xh3"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="bck-LK-uYC" secondAttribute="bottom" id="YeK-A4-vnU"/>
+                            <constraint firstItem="bck-LK-uYC" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="bTz-fD-LNv"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="bck-LK-uYC" secondAttribute="trailing" id="laH-k0-PYd"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
@@ -38,6 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
+            <point key="canvasLocation" x="47.826086956521742" y="20.758928571428569"/>
         </scene>
     </scenes>
 </document>

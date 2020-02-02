@@ -5,6 +5,10 @@ target 'seat-code' do
   # Comment the next line if you don't want to use dynamic frameworks
   use_frameworks!
   pod 'GoogleMaps'
+  pod 'RxSwift'
+  pod 'RxCocoa'
+  pod 'SwiftyJSON'
+  pod 'Alamofire'
 	
   # Pods for seat-code
 

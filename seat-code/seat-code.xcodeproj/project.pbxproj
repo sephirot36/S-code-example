@@ -19,6 +19,10 @@
 		141580F323E6E37B009F9218 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F223E6E37B009F9218 /* Stop.swift */; };
 		141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F423E6E3B7009F9218 /* MapPoint.swift */; };
 		141580F723E6E969009F9218 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F623E6E969009F9218 /* Point.swift */; };
+		141580F923E73325009F9218 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F823E73325009F9218 /* MainViewModel.swift */; };
+		141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580FB23E7379B009F9218 /* ResourcesApi.swift */; };
+		141580FF23E738A7009F9218 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580FE23E738A7009F9218 /* DataProvider.swift */; };
+		1415810123E738CF009F9218 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810023E738CF009F9218 /* NetworkProvider.swift */; };
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
@@ -60,6 +64,10 @@
 		141580F223E6E37B009F9218 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
 		141580F423E6E3B7009F9218 /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		141580F623E6E969009F9218 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
+		141580F823E73325009F9218 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
+		141580FB23E7379B009F9218 /* ResourcesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesApi.swift; sourceTree = "<group>"; };
+		141580FE23E738A7009F9218 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
+		1415810023E738CF009F9218 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
 		33B1F74E84A33902E41B9D3A /* Pods-seat-codeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.release.xcconfig"; sourceTree = "<group>"; };
 		40087BAB39A5296257128430 /* Pods-seat-codeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2BE8622AB3682129542829 /* Pods-seat-code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.debug.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.debug.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +145,7 @@
 		141580BB23E6CF1C009F9218 /* seat-code */ = {
 			isa = PBXGroup;
 			children = (
+				141580FA23E73728009F9218 /* Data */,
 				141580ED23E6D11B009F9218 /* View */,
 				141580EE23E6D131009F9218 /* ViewModel */,
 				141580EF23E6D13E009F9218 /* Model */,
@@ -179,6 +188,7 @@
 		141580EE23E6D131009F9218 /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				141580F823E73325009F9218 /* MainViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -192,6 +202,16 @@
 				141580F623E6E969009F9218 /* Point.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		141580FA23E73728009F9218 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				141580FB23E7379B009F9218 /* ResourcesApi.swift */,
+				141580FE23E738A7009F9218 /* DataProvider.swift */,
+				1415810023E738CF009F9218 /* NetworkProvider.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E7FDC1BA30B2B767918953B3 /* Frameworks */ = {
@@ -216,6 +236,7 @@
 				141580B623E6CF1C009F9218 /* Frameworks */,
 				141580B723E6CF1C009F9218 /* Resources */,
 				AC1F4BEE84307AEE6DE83701 /* [CP] Copy Pods Resources */,
+				B228A2F985A8728125A0761D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -396,6 +417,23 @@
 			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-seat-code/Pods-seat-code-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B228A2F985A8728125A0761D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seat-code/Pods-seat-code-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-seat-code/Pods-seat-code-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-seat-code/Pods-seat-code-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		DB7388BE2D66F12948FB7F62 /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -427,10 +465,14 @@
 			files = (
 				141580F123E6DC6E009F9218 /* Trip.swift in Sources */,
 				141580BF23E6CF1C009F9218 /* MainViewController.swift in Sources */,
+				141580FF23E738A7009F9218 /* DataProvider.swift in Sources */,
+				141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */,
 				141580F323E6E37B009F9218 /* Stop.swift in Sources */,
 				141580C523E6CF1D009F9218 /* seat_code.xcdatamodeld in Sources */,
 				141580F723E6E969009F9218 /* Point.swift in Sources */,
+				1415810123E738CF009F9218 /* NetworkProvider.swift in Sources */,
 				141580BD23E6CF1C009F9218 /* AppDelegate.swift in Sources */,
+				141580F923E73325009F9218 /* MainViewModel.swift in Sources */,
 				141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
