@@ -8,6 +8,7 @@
 import CoreLocation
 
 enum RouteStatus {
+    case idle
     case ongoing
     case scheduled
     case finalized

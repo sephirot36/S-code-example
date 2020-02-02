@@ -21,11 +21,13 @@ class ResourcesApi {
     
     // MARK: - Public methods
     
-    public func getTrips(result _: @escaping (DataResult) -> Void) {
+    public func getTrips(result: @escaping (DataResult) -> Void) {
         dataProvider.endPoint = "trips"
         dataProvider.httpMethod = .get
-        dataProvider.getData() { result in
-            print(result)
+        dataProvider.getData {
+            returnResult in
+            result(returnResult)
+            //print("RESULT:\(result)")
         }
     }
 }
