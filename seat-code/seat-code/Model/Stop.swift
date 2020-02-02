@@ -8,5 +8,10 @@
 
 struct Stop {
     var id: Int
+    var stopTime: String
+    var paid: Bool
     var point: MapPoint
+    var tripId: Int
+    var username: String
+    var price: Float
 }
