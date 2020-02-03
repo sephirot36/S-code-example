@@ -109,3 +109,5 @@ build
 /*.gcno
 
 # End of https://www.gitignore.io/api/macos,xcode,swift
+seat-code/seat-code.xcworkspace/contents.xcworkspacedata
+seat-code/seat-code.xcworkspace/xcshareddata/IDEWorkspaceChecks.plist
