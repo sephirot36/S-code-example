@@ -37,46 +37,16 @@ class MainViewModel {
             switch result {
             case .success(let json):
                 let tmpTrips = json.arrayValue.compactMap {
-                    let coords: [CLLocationCoordinate2D] = []
-                    var status: RouteStatus
-                    
-                    switch $0["status"].stringValue {
-                    case "ongoing":
-                        status = .ongoing
-                    case "scheduled":
-                        status = .scheduled
-                    case "finalized":
-                        status = .finalized
-                    case "cancelled":
-                        status = .canceled
-                    default:
-                        status = .idle
-                    }
-                    
-                    let stopsArray = $0["stops"].arrayValue.compactMap {
-                        Stop(id: $0["id"].intValue, stopTime: "", paid: false,
-                             point: MapPoint(point: Point(latitude: $0["_latitude"].floatValue, longitude: $0["_longitude"].floatValue), address: ""),
-                             tripId: 0, username: "", price: 0.0)
-                    }
-                    
-                    let origin = MapPoint(point: Point(latitude: $0["origin"]["point"]["_latitude"].floatValue,
-                                                       longitude: $0["origin"]["point"]["_longitude"].floatValue),
-                                          address: $0["origin"]["address"].stringValue)
-                    
-                    let destination = MapPoint(point: Point(latitude: $0["destination"]["point"]["_latitude"].floatValue,
-                                                            longitude: $0["destination"]["point"]["_longitude"].floatValue),
-                                               address: $0["destination"]["address"].stringValue)
-                    
                     Trip(description: $0["description"].stringValue,
                          driverName: $0["driverName"].stringValue,
                          startTime: $0["startTime"].stringValue,
                          endTime: $0["endTime"].stringValue,
                          routeString: $0["route"].stringValue,
-                         routeCoords: coords,
-                         status: status,
-                         stops: stopsArray,
-                         origin: origin,
-                         destination: destination)
+                         routeCoords: self!.getTripCoords(trip: $0),
+                         status: self!.getTripStatus(trip: $0),
+                         stops: self!.getTripStops(trip: $0),
+                         origin: self!.getTripOrigin(trip: $0),
+                         destination: self!.getTripDestination(trip: $0))
                 }
                 self!.trips.onNext(tmpTrips)
             case .failure(let failure):
@@ -84,4 +54,52 @@ class MainViewModel {
             }
         }
     }
+    
+    // MARK: - Private methods
+    
+    private func getTripCoords(trip: JSON) -> [CLLocationCoordinate2D] {
+        return []
+    }
+    
+    private func getTripStatus(trip: JSON) -> RouteStatus {
+        var status: RouteStatus
+        
+        switch trip["status"].stringValue {
+        case "ongoing":
+            status = .ongoing
+        case "scheduled":
+            status = .scheduled
+        case "finalized":
+            status = .finalized
+        case "cancelled":
+            status = .canceled
+        default:
+            status = .idle
+        }
+        return status
+    }
+    
+    private func getTripStops(trip: JSON) -> [Stop] {
+        let stops = trip["stops"].arrayValue.compactMap { _ in
+            Stop(id: trip["id"].intValue, stopTime: "", paid: false,
+                 point: MapPoint(point: Point(latitude: trip["_latitude"].floatValue, longitude: trip["_longitude"].floatValue), address: ""),
+                 tripId: 0, username: "", price: 0.0)
+        }
+        
+        return stops
+    }
+    
+    private func getTripOrigin(trip: JSON) -> MapPoint {
+        let origin = MapPoint(point: Point(latitude: trip["origin"]["point"]["_latitude"].floatValue,
+                              longitude: trip["origin"]["point"]["_longitude"].floatValue),
+                 address: trip["origin"]["address"].stringValue)
+        return origin
+    }
+    
+    private func getTripDestination(trip: JSON) -> MapPoint {
+        let destination = MapPoint(point: Point(latitude: trip["destination"]["point"]["_latitude"].floatValue,
+                                 longitude: trip["destination"]["point"]["_longitude"].floatValue),
+                    address: trip["destination"]["address"].stringValue)
+           return destination
+       }
 }

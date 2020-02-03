@@ -26,6 +26,8 @@
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
+		DA38878323E8342B00EDEBFC /* TripTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38878223E8342B00EDEBFC /* TripTableViewCell.swift */; };
+		DA38878623E8345E00EDEBFC /* TripTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = DA38878523E8345E00EDEBFC /* TripTableViewCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -74,6 +76,8 @@
 		94AFFC1D74E8D3783FA82BE0 /* Pods-seat-codeUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeUITests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeUITests/Pods-seat-codeUITests.release.xcconfig"; sourceTree = "<group>"; };
 		964D855A8957945352BA8517 /* Pods-seat-codeUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeUITests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeUITests/Pods-seat-codeUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_code.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DA38878223E8342B00EDEBFC /* TripTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripTableViewCell.swift; sourceTree = "<group>"; };
+		DA38878523E8345E00EDEBFC /* TripTableViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TripTableViewCell.xib; sourceTree = "<group>"; };
 		DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_codeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DDFAFA19F217DED80F10C3AC /* Pods-seat-code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.release.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.release.xcconfig"; sourceTree = "<group>"; };
 		EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_codeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -180,6 +184,7 @@
 		141580ED23E6D11B009F9218 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA38878423E8343000EDEBFC /* TableViewCells */,
 				141580BE23E6CF1C009F9218 /* MainViewController.swift */,
 			);
 			path = View;
@@ -212,6 +217,15 @@
 				1415810023E738CF009F9218 /* NetworkProvider.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		DA38878423E8343000EDEBFC /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				DA38878223E8342B00EDEBFC /* TripTableViewCell.swift */,
+				DA38878523E8345E00EDEBFC /* TripTableViewCell.xib */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 		E7FDC1BA30B2B767918953B3 /* Frameworks */ = {
@@ -333,6 +347,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA38878623E8345E00EDEBFC /* TripTableViewCell.xib in Resources */,
 				141580CA23E6CF1F009F9218 /* LaunchScreen.storyboard in Resources */,
 				141580C723E6CF1F009F9218 /* Assets.xcassets in Resources */,
 				141580C223E6CF1D009F9218 /* Main.storyboard in Resources */,
@@ -463,6 +478,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DA38878323E8342B00EDEBFC /* TripTableViewCell.swift in Sources */,
 				141580F123E6DC6E009F9218 /* Trip.swift in Sources */,
 				141580BF23E6CF1C009F9218 /* MainViewController.swift in Sources */,
 				141580FF23E738A7009F9218 /* DataProvider.swift in Sources */,
