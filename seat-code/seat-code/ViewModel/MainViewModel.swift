@@ -34,13 +34,14 @@ class MainViewModel {
     public func getTrips() {
         resourcesApi.getTrips { [weak self]
             result in
+            print(result)
             switch result {
             case .success(let json):
                 let tmpTrips = json.arrayValue.compactMap {
                     Trip(description: $0["description"].stringValue,
                          driverName: $0["driverName"].stringValue,
-                         startTime: $0["startTime"].stringValue,
-                         endTime: $0["endTime"].stringValue,
+                         startTime: $0["startTime"].stringValue.toDate(),
+                         endTime: $0["endTime"].stringValue.toDate(),
                          routeString: $0["route"].stringValue,
                          routeCoords: self!.getTripCoords(trip: $0),
                          status: self!.getTripStatus(trip: $0),

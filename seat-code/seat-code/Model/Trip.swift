@@ -18,8 +18,8 @@ enum RouteStatus {
 struct Trip {
     var description: String
     var driverName: String
-    var startTime: String
-    var endTime: String
+    var startTime: Date
+    var endTime: Date
     var routeString: String
     var routeCoords: [CLLocationCoordinate2D]
     var status: RouteStatus

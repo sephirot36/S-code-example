@@ -57,6 +57,6 @@ class MainViewController: UIViewController {
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         // TODO: Try to return dynamic height depending of the content of summary
-        return 130
+        return 80
     }
 }

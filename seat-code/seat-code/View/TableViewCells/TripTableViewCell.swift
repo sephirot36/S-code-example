@@ -19,9 +19,9 @@ class TripTableViewCell: UITableViewCell {
     
     public var cellTrip: Trip! {
         didSet {
+            self.tripStatus.backgroundColor = self.getStatusIcon(status: self.cellTrip.status)
             self.tripDescription.text = self.cellTrip.description
-            self.tripInfo.text = self.cellTrip.startTime
-            self.tripStatus.backgroundColor = getStatusIcon(status: self.cellTrip.status)
+            self.tripInfo.attributedText = self.getTripInfo(trip: self.cellTrip)
         }
     }
     
@@ -40,6 +40,49 @@ class TripTableViewCell: UITableViewCell {
         default:
             return UIColor.yellow
         }
+    }
+    
+    private func getTimeDifference(start: Date, end: Date) -> String {
+        
+        let difference = start.hoursAndMinutes(between: end)
+        
+        var hours = "\(difference.hour!)"
+        if difference.hour! < 10 {
+            hours = "0\(difference.hour ?? 0)"
+        }
+        
+        var minutes = "\(difference.minute!)"
+        if difference.minute! < 10 {
+            minutes = "0\(difference.minute ?? 0)"
+        }
+        
+        
+        return "\(hours):\(minutes)"
+    }
+    
+    private func getTripInfo(trip: Trip) -> NSMutableAttributedString {
+        let startTime = trip.startTime.toString(dateFormat: "HH:mm")
+        
+        let timeDifference = getTimeDifference(start:trip.startTime, end: trip.endTime)
+        
+        let boldAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)]
+        let normalAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
+        
+        // Starts: 08:00 / Duration: 1h (6 stops)
+        let mutableString = NSMutableAttributedString(string: "Salida: ", attributes: boldAttribute)
+        let startTimeString = NSMutableAttributedString(string: startTime, attributes: normalAttribute)
+        let separatorString = NSMutableAttributedString(string: " / ", attributes: normalAttribute)
+        let durationString = NSMutableAttributedString(string: "Duración:", attributes: boldAttribute)
+        let durationValueString = NSMutableAttributedString(string: " \(timeDifference) ", attributes: normalAttribute)
+        let stopString = NSMutableAttributedString(string: "(\(trip.stops.count) stops)", attributes: boldAttribute)
+        
+        mutableString.append(startTimeString)
+        mutableString.append(separatorString)
+        mutableString.append(durationString)
+        mutableString.append(durationValueString)
+        mutableString.append(stopString)
+        
+        return mutableString
     }
     
     // MARK: - UITableViewCell lifecycle
