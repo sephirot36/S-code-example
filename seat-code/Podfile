@@ -9,6 +9,8 @@ target 'seat-code' do
   pod 'RxCocoa'
   pod 'SwiftyJSON'
   pod 'Alamofire'
+  pod 'Polyline', '~> 4.0'
+  pod 'SwiftLint'
 	
   # Pods for seat-code
 

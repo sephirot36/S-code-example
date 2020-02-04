@@ -10,6 +10,7 @@ import GoogleMaps
 import RxCocoa
 import RxSwift
 import SwiftyJSON
+import Polyline
 
 class MainViewModel {
     // MARK: - Constants
@@ -70,7 +71,7 @@ class MainViewModel {
     // MARK: - Private methods
     
     private func getTripCoords(trip: JSON) -> [CLLocationCoordinate2D] {
-        return []
+        return decodePolyline(trip["route"].stringValue) ?? []
     }
     
     private func getTripStatus(trip: JSON) -> RouteStatus {

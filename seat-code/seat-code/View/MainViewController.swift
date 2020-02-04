@@ -44,14 +44,24 @@ class MainViewController: UIViewController {
     // MARK: Private methods
 
     private func binds() {
+        guard let viewModel = self.viewModel else {
+            print("No viewModel available")
+            return
+        }
+
         self.tableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
 
         self.tableView.register(UINib(nibName: "TripTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: TripTableViewCell.self))
 
-        self.viewModel?.trips.bind(to: self.tableView.rx.items(cellIdentifier: "TripTableViewCell", cellType: TripTableViewCell.self)) { _, trip, cell in
+        viewModel.trips.bind(to: self.tableView.rx.items(cellIdentifier: "TripTableViewCell", cellType: TripTableViewCell.self)) { _, trip, cell in
             cell.cellTrip = trip
         }.disposed(by: self.disposeBag)
+
+        self.tableView.rx.modelSelected(Trip.self)
+            .subscribe(onNext: { [weak self] trip in
+                self?.loadRoute(routePoints: trip.routeCoords)
+            }).disposed(by: self.disposeBag)
     }
 
     private func callbacks() {
@@ -78,6 +88,24 @@ class MainViewController: UIViewController {
         let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
+    }
+
+    // MARK: Public methods
+
+    public func loadRoute(routePoints: [CLLocationCoordinate2D]) {
+        self.mapView.clear()
+        let path = GMSMutablePath()
+        for point in routePoints {
+            path.add(point)
+        }
+
+        let route = GMSPolyline(path: path)
+        route.map = self.mapView
+
+        let bounds = GMSCoordinateBounds(coordinate: routePoints[0], coordinate: routePoints[routePoints.count - 1])
+
+        let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 30, left: 30, bottom: 30, right: 30))
+        self.mapView.moveCamera(update)
     }
 }
 
