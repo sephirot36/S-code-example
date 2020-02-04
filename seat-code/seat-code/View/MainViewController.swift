@@ -7,9 +7,9 @@
 //
 
 import GoogleMaps
-import UIKit
 import RxCocoa
 import RxSwift
+import UIKit
 
 class MainViewController: UIViewController {
     // MARK: - @IBOutlets
@@ -46,25 +46,38 @@ class MainViewController: UIViewController {
     private func binds() {
         self.tableView.rx.setDelegate(self)
             .disposed(by: self.disposeBag)
-        
+
         self.tableView.register(UINib(nibName: "TripTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: TripTableViewCell.self))
-        
+
         self.viewModel?.trips.bind(to: self.tableView.rx.items(cellIdentifier: "TripTableViewCell", cellType: TripTableViewCell.self)) { _, trip, cell in
             cell.cellTrip = trip
         }.disposed(by: self.disposeBag)
     }
-    
+
     private func callbacks() {
         guard let viewModel = viewModel else {
-                   print("No viewModel available")
-                   return
-               }
-               viewModel.isLoading
-                   .subscribe(onNext: { [weak self] isLoading in
-                       guard let `self` = self else { return }
-                    self.tableView.isHidden = isLoading
-                    self.loadingIndicator.isHidden = !isLoading
-                   }).disposed(by: self.disposeBag)
+            print("No viewModel available")
+            return
+        }
+        viewModel.isLoading
+            .subscribe(onNext: { [weak self] isLoading in
+                guard let `self` = self else { return }
+                self.tableView.isHidden = isLoading
+                self.loadingIndicator.isHidden = !isLoading
+            }).disposed(by: self.disposeBag)
+        
+        viewModel.requestError
+        .subscribe(onNext: { [weak self] requestError in
+            guard let `self` = self else { return }
+            self.showAlert(message: requestError)
+        }).disposed(by: self.disposeBag)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alert.addAction(closeAction)
+        self.present(alert, animated: true, completion: nil)
     }
 }
 

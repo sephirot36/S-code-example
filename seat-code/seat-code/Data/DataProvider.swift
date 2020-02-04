@@ -27,6 +27,8 @@ enum DataError: Error {
     case serverUnavailable
 }
 
+// MARK: - Protocol definition
+
 protocol DataProvider {
      func getData(completion: @escaping (DataResult) -> Void)
 }

@@ -9,7 +9,7 @@
 import Foundation
 
 extension Date {
-    func hoursAndMinutes(between otherDate: Date) -> DateComponents {
+    func differenceHoursAndMinutes(between otherDate: Date) -> DateComponents {
         let calendar = Calendar.current
         let components = calendar.dateComponents([.hour, .minute], from: self, to: otherDate)
         return components

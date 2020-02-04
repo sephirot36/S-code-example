@@ -17,6 +17,8 @@ enum HTTPMethod: String {
     case get = "GET"
 }
 
+// MARK: - Class definition
+
 class NetworkProvider: DataProvider {
     // MARK: - Constants
 
@@ -62,7 +64,7 @@ class NetworkProvider: DataProvider {
                 if let statusCode = response.response?.statusCode {
                     switch statusCode {
                     case 400...499:
-                        completion(DataResult.failure(.serverError))
+                        completion(DataResult.failure(.invalidResponse))
                     case 500...599:
                         completion(DataResult.failure(.serverError))
                     default:

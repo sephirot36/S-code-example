@@ -19,6 +19,7 @@ class MainViewModel {
     
     let trips = PublishSubject<[Trip]>()
     let isLoading = PublishSubject<Bool>()
+    let requestError = PublishSubject<String>()
     
     // MARK: - Initializer
     
@@ -50,10 +51,19 @@ class MainViewModel {
                          destination: self.getTripDestination(trip: $0))
                 }
                 self.trips.onNext(tmpTrips)
-                self.isLoading.onNext(false)
             case .failure(let failure):
-                print(failure)
+                switch failure {
+                case .invalidResponse:
+                    self.requestError.onNext("No hemos podido cargar las rutas, por favor inténtalo más tarde.")
+                case .serverError:
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde")
+                case .unknownError:
+                    self.requestError.onNext("Se ha producido un error, por favor inténtalo más tarde.")
+                default:
+                    self.requestError.onNext("No hemos podido cargar las rutas, por favor inténtalo más tarde.")
+                }
             }
+            self.isLoading.onNext(false)
         }
     }
     

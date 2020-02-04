@@ -22,8 +22,11 @@ class ResourcesApi {
     // MARK: - Public methods
     
     public func getTrips(result: @escaping (DataResult) -> Void) {
+        // Set request params
         dataProvider.endPoint = "trips"
         dataProvider.httpMethod = .get
+        
+        // Get data with current params
         dataProvider.getData {
             returnResult in
             result(returnResult)

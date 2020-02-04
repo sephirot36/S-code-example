@@ -44,7 +44,7 @@ class TripTableViewCell: UITableViewCell {
     
     private func getTimeDifference(start: Date, end: Date) -> String {
         
-        let difference = start.hoursAndMinutes(between: end)
+        let difference = start.differenceHoursAndMinutes(between: end)
         
         var hours = "\(difference.hour!)"
         if difference.hour! < 10 {
