@@ -65,14 +65,14 @@ class MainViewController: UIViewController {
                 self.tableView.isHidden = isLoading
                 self.loadingIndicator.isHidden = !isLoading
             }).disposed(by: self.disposeBag)
-        
+
         viewModel.requestError
-        .subscribe(onNext: { [weak self] requestError in
-            guard let `self` = self else { return }
-            self.showAlert(message: requestError)
-        }).disposed(by: self.disposeBag)
+            .subscribe(onNext: { [weak self] requestError in
+                guard let `self` = self else { return }
+                self.showAlert(message: requestError)
+            }).disposed(by: self.disposeBag)
     }
-    
+
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)

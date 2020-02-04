@@ -43,7 +43,6 @@ class TripTableViewCell: UITableViewCell {
     }
     
     private func getTimeDifference(start: Date, end: Date) -> String {
-        
         let difference = start.differenceHoursAndMinutes(between: end)
         
         var hours = "\(difference.hour!)"
@@ -56,19 +55,17 @@ class TripTableViewCell: UITableViewCell {
             minutes = "0\(difference.minute ?? 0)"
         }
         
-        
         return "\(hours):\(minutes)"
     }
     
     private func getTripInfo(trip: Trip) -> NSMutableAttributedString {
         let startTime = trip.startTime.toString(dateFormat: "HH:mm")
         
-        let timeDifference = getTimeDifference(start:trip.startTime, end: trip.endTime)
+        let timeDifference = self.getTimeDifference(start: trip.startTime, end: trip.endTime)
         
         let boldAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)]
         let normalAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
-        
-        // Starts: 08:00 / Duration: 1h (6 stops)
+       
         let mutableString = NSMutableAttributedString(string: "Salida: ", attributes: boldAttribute)
         let startTimeString = NSMutableAttributedString(string: startTime, attributes: normalAttribute)
         let separatorString = NSMutableAttributedString(string: " / ", attributes: normalAttribute)
