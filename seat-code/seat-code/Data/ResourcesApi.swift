@@ -27,7 +27,6 @@ class ResourcesApi {
         dataProvider.getData {
             returnResult in
             result(returnResult)
-            //print("RESULT:\(result)")
         }
     }
 }

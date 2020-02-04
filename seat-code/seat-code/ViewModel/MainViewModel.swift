@@ -12,14 +12,13 @@ import RxSwift
 import SwiftyJSON
 
 class MainViewModel {
-    // MARK: - Variables
-    
-    var trips = PublishSubject<[Trip]>()
-    
     // MARK: - Constants
     
     private let resourcesApi: ResourcesApi
     private let disposeBag = DisposeBag()
+    
+    let trips = PublishSubject<[Trip]>()
+    let isLoading = PublishSubject<Bool>()
     
     // MARK: - Initializer
     
@@ -32,9 +31,10 @@ class MainViewModel {
     // MARK: - Public methods
     
     public func getTrips() {
+        isLoading.onNext(true)
         resourcesApi.getTrips { [weak self]
             result in
-            print(result)
+            guard let `self` = self else { return }
             switch result {
             case .success(let json):
                 let tmpTrips = json.arrayValue.compactMap {
@@ -43,13 +43,14 @@ class MainViewModel {
                          startTime: $0["startTime"].stringValue.toDate(),
                          endTime: $0["endTime"].stringValue.toDate(),
                          routeString: $0["route"].stringValue,
-                         routeCoords: self!.getTripCoords(trip: $0),
-                         status: self!.getTripStatus(trip: $0),
-                         stops: self!.getTripStops(trip: $0),
-                         origin: self!.getTripOrigin(trip: $0),
-                         destination: self!.getTripDestination(trip: $0))
+                         routeCoords: self.getTripCoords(trip: $0),
+                         status: self.getTripStatus(trip: $0),
+                         stops: self.getTripStops(trip: $0),
+                         origin: self.getTripOrigin(trip: $0),
+                         destination: self.getTripDestination(trip: $0))
                 }
-                self!.trips.onNext(tmpTrips)
+                self.trips.onNext(tmpTrips)
+                self.isLoading.onNext(false)
             case .failure(let failure):
                 print(failure)
             }
@@ -92,15 +93,15 @@ class MainViewModel {
     
     private func getTripOrigin(trip: JSON) -> MapPoint {
         let origin = MapPoint(point: Point(latitude: trip["origin"]["point"]["_latitude"].floatValue,
-                              longitude: trip["origin"]["point"]["_longitude"].floatValue),
-                 address: trip["origin"]["address"].stringValue)
+                                           longitude: trip["origin"]["point"]["_longitude"].floatValue),
+                              address: trip["origin"]["address"].stringValue)
         return origin
     }
     
     private func getTripDestination(trip: JSON) -> MapPoint {
         let destination = MapPoint(point: Point(latitude: trip["destination"]["point"]["_latitude"].floatValue,
-                                 longitude: trip["destination"]["point"]["_longitude"].floatValue),
-                    address: trip["destination"]["address"].stringValue)
-           return destination
-       }
+                                                longitude: trip["destination"]["point"]["_longitude"].floatValue),
+                                   address: trip["destination"]["address"].stringValue)
+        return destination
+    }
 }

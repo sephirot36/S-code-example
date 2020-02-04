@@ -16,6 +16,7 @@ class MainViewController: UIViewController {
 
     @IBOutlet var mapView: GMSMapView!
     @IBOutlet var tableView: UITableView!
+    @IBOutlet var loadingIndicator: UIActivityIndicatorView!
 
     // MARK: - Constants
 
@@ -37,6 +38,7 @@ class MainViewController: UIViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.binds()
+        self.callbacks()
     }
 
     // MARK: Private methods
@@ -50,6 +52,19 @@ class MainViewController: UIViewController {
         self.viewModel?.trips.bind(to: self.tableView.rx.items(cellIdentifier: "TripTableViewCell", cellType: TripTableViewCell.self)) { _, trip, cell in
             cell.cellTrip = trip
         }.disposed(by: self.disposeBag)
+    }
+    
+    private func callbacks() {
+        guard let viewModel = viewModel else {
+                   print("No viewModel available")
+                   return
+               }
+               viewModel.isLoading
+                   .subscribe(onNext: { [weak self] isLoading in
+                       guard let `self` = self else { return }
+                    self.tableView.isHidden = isLoading
+                    self.loadingIndicator.isHidden = !isLoading
+                   }).disposed(by: self.disposeBag)
     }
 }
 
