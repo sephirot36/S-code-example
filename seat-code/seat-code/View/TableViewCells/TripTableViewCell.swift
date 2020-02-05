@@ -11,7 +11,7 @@ import UIKit
 class TripTableViewCell: UITableViewCell {
     // MARK: - @IBOutlets
     
-    @IBOutlet var tripStatus: UIImageView!
+    @IBOutlet var tripStatus: UIView!
     @IBOutlet var tripDescription: UILabel!
     @IBOutlet var tripInfo: UILabel!
     
@@ -19,6 +19,7 @@ class TripTableViewCell: UITableViewCell {
     
     public var cellTrip: Trip! {
         didSet {
+            self.tripStatus.layer.cornerRadius = self.tripStatus.frame.width / 2
             self.tripStatus.backgroundColor = self.getStatusIcon(status: self.cellTrip.status)
             self.tripDescription.text = self.cellTrip.description
             self.tripInfo.attributedText = self.getTripInfo(trip: self.cellTrip)
@@ -87,10 +88,19 @@ class TripTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         self.backgroundColor = .clear
-        self.selectionStyle = .none
     }
     
     override func prepareForReuse() {
         super.prepareForReuse()
+    }
+    
+    override func setSelected(_ selected: Bool, animated: Bool) {
+        super.setSelected(selected, animated: animated)
+
+        if selected {
+            contentView.backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+        } else {
+            contentView.backgroundColor = UIColor.clear
+        }
     }
 }

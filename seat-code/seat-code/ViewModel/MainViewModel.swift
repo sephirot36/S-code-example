@@ -10,6 +10,7 @@ import GoogleMaps
 import RxCocoa
 import RxSwift
 import SwiftyJSON
+import Polyline
 
 class MainViewModel {
     // MARK: - Constants
@@ -70,7 +71,7 @@ class MainViewModel {
     // MARK: - Private methods
     
     private func getTripCoords(trip: JSON) -> [CLLocationCoordinate2D] {
-        return []
+        return decodePolyline(trip["route"].stringValue) ?? []
     }
     
     private func getTripStatus(trip: JSON) -> RouteStatus {
@@ -92,9 +93,9 @@ class MainViewModel {
     }
     
     private func getTripStops(trip: JSON) -> [Stop] {
-        let stops = trip["stops"].arrayValue.compactMap { _ in
-            Stop(id: trip["id"].intValue, stopTime: "", paid: false,
-                 point: MapPoint(point: Point(latitude: trip["_latitude"].floatValue, longitude: trip["_longitude"].floatValue), address: ""),
+        let stops = trip["stops"].arrayValue.compactMap {
+            Stop(id: $0["id"].intValue, stopTime: "", paid: false,
+                 point: MapPoint(point: Point(latitude: $0["point"]["_latitude"].floatValue, longitude: $0["point"]["_longitude"].floatValue), address: ""),
                  tripId: 0, username: "", price: 0.0)
         }
         
