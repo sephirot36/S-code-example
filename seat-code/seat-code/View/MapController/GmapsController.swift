@@ -18,6 +18,7 @@ class GmapsController: UIViewController, MapControllerProtocol {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        self.mapView.delegate = self
     }
     
     // MARK: MapControllerProtocol conformance
@@ -45,6 +46,15 @@ class GmapsController: UIViewController, MapControllerProtocol {
         marker.map = self.mapView
     }
     
+    func createMarkerAtLocationWithId(location: CLLocationCoordinate2D, icon: UIImage?, id: Int) {
+        let marker = GMSMarker(position: location)
+        marker.userData = id
+        if let icon = icon {
+            marker.icon = icon
+        }
+        marker.map = self.mapView
+    }
+    
     func drawLine(points: [CLLocationCoordinate2D]) {
         let path = GMSMutablePath()
         for point in points {
@@ -53,5 +63,17 @@ class GmapsController: UIViewController, MapControllerProtocol {
         
         let route = GMSPolyline(path: path)
         route.map = self.mapView
+    }
+}
+
+extension GmapsController: GMSMapViewDelegate {
+    func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
+        marker.title = "BLA BLA BLA"
+        marker.snippet = "Population: 8,174,100"
+        marker.tracksInfoWindowChanges = true
+        mapView.selectedMarker=marker
+        centerMapOnLocation(location: marker.position, zoom: 11)
+        print("MARKER:\(String(describing: marker.userData))")
+        return true
     }
 }

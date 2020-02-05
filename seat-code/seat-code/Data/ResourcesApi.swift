@@ -32,4 +32,16 @@ class ResourcesApi {
             result(returnResult)
         }
     }
+    
+    public func getStopInfo(id: Int, result: @escaping (DataResult) -> Void) {
+        // Set request params
+        dataProvider.endPoint = "stops/\(id)"
+        dataProvider.httpMethod = .get
+        
+        // Get data with current params
+        dataProvider.getData {
+            returnResult in
+            result(returnResult)
+        }
+    }
 }

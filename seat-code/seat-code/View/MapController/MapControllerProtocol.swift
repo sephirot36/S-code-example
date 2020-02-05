@@ -17,6 +17,8 @@ protocol MapControllerProtocol {
     
     func createMarkerAtLocation(location: CLLocationCoordinate2D, icon: UIImage?)
     
+    func createMarkerAtLocationWithId(location: CLLocationCoordinate2D, icon: UIImage?, id: Int)
+    
     func drawLine(points: [CLLocationCoordinate2D])
 }
 

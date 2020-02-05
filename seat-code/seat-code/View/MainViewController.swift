@@ -81,7 +81,7 @@ class MainViewController: UIViewController {
                                                                                           longitude: CLLocationDegrees(trip.origin.point.longitude)), end: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point.latitude), longitude: CLLocationDegrees(trip.destination.point.longitude)))
 
                 for stop in trip.stops {
-                    self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(stop.point.point.latitude), longitude: CLLocationDegrees(stop.point.point.longitude)), icon: GMSMarker.markerImage(with: .orange))
+                    self?.mapController.createMarkerAtLocationWithId(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(stop.point.point.latitude), longitude: CLLocationDegrees(stop.point.point.longitude)), icon: GMSMarker.markerImage(with: .orange), id: stop.id)
                 }
             }).disposed(by: self.disposeBag)
     }
