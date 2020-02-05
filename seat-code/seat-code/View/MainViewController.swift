@@ -111,42 +111,6 @@ class MainViewController: UIViewController {
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
     }
-
-    // MARK: Public methods
-
-//
-//    public func loadRoute(routePoints: [CLLocationCoordinate2D]) {
-//        self.mapView.clear()
-//        let path = GMSMutablePath()
-//        for point in routePoints {
-//            path.add(point)
-//        }
-//
-//        let route = GMSPolyline(path: path)
-//        route.map = self.mapView
-//
-//        let bounds = GMSCoordinateBounds(coordinate: routePoints[0], coordinate: routePoints[routePoints.count - 1])
-//
-//        let update = GMSCameraUpdate.fit(bounds, with: UIEdgeInsets(top: 40, left: 30, bottom: 40, right: 30))
-//        self.mapView.moveCamera(update)
-//    }
-//
-//    public func createMarkerAt(point: Point, color: UIColor = .clear) {
-//        let position = CLLocationCoordinate2D(latitude: CLLocationDegrees(point.latitude), longitude: CLLocationDegrees(point.longitude))
-//        let marker = GMSMarker(position: position)
-//
-//        if color != .clear {
-//            marker.icon = GMSMarker.markerImage(with: color)
-//        }
-//
-//        marker.map = self.mapView
-//    }
-//
-//    public func displayStops(stops: [Stop]) {
-//        for stop in stops {
-//            self.createMarkerAt(point: stop.point.point, color: .orange)
-//        }
-//    }
 }
 
 // Extend Controller to perform UITableViewDelegate
