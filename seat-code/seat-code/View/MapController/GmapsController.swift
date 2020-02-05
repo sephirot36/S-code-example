@@ -37,9 +37,11 @@ class GmapsController: UIViewController, MapControllerProtocol {
         self.mapView.camera = GMSCameraPosition.camera(withTarget: location, zoom: zoom)
     }
     
-    func createMarkerAtLocation(location: CLLocationCoordinate2D, icon: UIImage) {
+    func createMarkerAtLocation(location: CLLocationCoordinate2D, icon: UIImage?) {
         let marker = GMSMarker(position: location)
-        marker.icon = icon
+        if let icon = icon {
+            marker.icon = icon
+        }
         marker.map = self.mapView
     }
     

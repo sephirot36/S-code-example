@@ -15,7 +15,7 @@ protocol MapControllerProtocol {
     
     func centerMapBetweenPoints(origin: CLLocationCoordinate2D, end: CLLocationCoordinate2D)
     
-    func createMarkerAtLocation(location: CLLocationCoordinate2D, icon: UIImage)
+    func createMarkerAtLocation(location: CLLocationCoordinate2D, icon: UIImage?)
     
     func drawLine(points: [CLLocationCoordinate2D])
 }
