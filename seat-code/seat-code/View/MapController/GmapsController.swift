@@ -118,6 +118,8 @@ extension GmapsController: GMSMapViewDelegate {
             self.mapView.selectedMarker = marker
             self.selectedMarker = marker
             self.viewModel?.getStopInfo(id: markerId as! Int)
+        } else {
+            self.showAlert(message: "No hay información disponible")
         }
         return true
     }
