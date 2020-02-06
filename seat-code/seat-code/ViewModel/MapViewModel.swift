@@ -32,29 +32,30 @@ class MapViewModel {
             switch result {
             case .success(let json):
                 let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.parseDateFormat)
                 
                 do {
                     let stop = try decoder.decode(Stop.self, from: json.rawData())
                     self.stopInfo.onNext(stop)
                 } catch let DecodingError.dataCorrupted(context) {
-                        print(context)
-                        self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
-                    } catch let DecodingError.keyNotFound(key, context) {
-                        print("Key '\(key)' not found:", context.debugDescription)
-                        print("codingPath:", context.codingPath)
-                        self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
-                    } catch let DecodingError.valueNotFound(value, context) {
-                        print("Value '\(value)' not found:", context.debugDescription)
-                        print("codingPath:", context.codingPath)
-                        self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
-                    } catch let DecodingError.typeMismatch(type, context) {
-                        print("Type '\(type)' mismatch:", context.debugDescription)
-                        print("codingPath:", context.codingPath)
-                        self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
-                    } catch {
-                        print("error: ", error)
-                        self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
-                    }
+                    print(context)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.typeMismatch(type, context) {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch {
+                    print("error: ", error)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                }
             case .failure(let failure):
                 print(failure)
                 switch failure {
@@ -68,7 +69,7 @@ class MapViewModel {
                     self.requestError.onNext("No hemos podido cargar la información de la parada, por favor inténtalo más tarde.")
                 }
             }
-            //self.isLoading.onNext(false)
+            // self.isLoading.onNext(false)
         }
     }
 }
