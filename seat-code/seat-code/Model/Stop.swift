@@ -6,12 +6,12 @@
 //  Copyright © 2020 Sephirot36. All rights reserved.
 //
 
-struct Stop {
-    var id: Int
-    var stopTime: String
-    var paid: Bool
-    var point: MapPoint
+struct Stop: Codable {
     var tripId: Int
-    var username: String
+    var address: String
+    var paid: Bool
+    var stopTime: String
     var price: Float
+    var userName: String
+    var point: Point
 }

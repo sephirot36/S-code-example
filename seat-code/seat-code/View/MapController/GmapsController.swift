@@ -7,11 +7,22 @@
 //
 
 import GoogleMaps
+import RxCocoa
+import RxSwift
 
 class GmapsController: UIViewController, MapControllerProtocol {
     // MARK: - @IBOutlets
     
     @IBOutlet var mapView: GMSMapView!
+    
+    // MARK: - Constants
+    
+    let disposeBag = DisposeBag()
+    
+    // MARK: - Variables
+    
+    var viewModel: MapViewModel? = MapViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))
+    var selectedMarker: GMSMarker = GMSMarker()
     
     // MARK: View lifecycle
     
@@ -19,6 +30,22 @@ class GmapsController: UIViewController, MapControllerProtocol {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.mapView.delegate = self
+        self.callbacks()
+    }
+    
+    // MARK: Private methods
+    
+    private func callbacks() {
+        guard let viewModel = viewModel else {
+            print("No viewModel available")
+            return
+        }
+        viewModel.stopInfo
+            .subscribe(onNext: { [weak self] stopInfo in
+                guard let `self` = self else { return }
+                print("STOOOOOOP:\(stopInfo)")
+                self.openMarkerInfo(title: stopInfo.address, snippet: stopInfo.userName)
+            }).disposed(by: self.disposeBag)
     }
     
     // MARK: MapControllerProtocol conformance
@@ -64,16 +91,23 @@ class GmapsController: UIViewController, MapControllerProtocol {
         let route = GMSPolyline(path: path)
         route.map = self.mapView
     }
+    
+    func openMarkerInfo(title: String, snippet: String) {
+        selectedMarker.title = title
+        selectedMarker.snippet = snippet
+        selectedMarker.tracksInfoWindowChanges = true
+        mapView.selectedMarker = selectedMarker
+        self.centerMapOnLocation(location: selectedMarker.position, zoom: 11)
+    }
 }
 
 extension GmapsController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
-        marker.title = "BLA BLA BLA"
-        marker.snippet = "Population: 8,174,100"
-        marker.tracksInfoWindowChanges = true
-        mapView.selectedMarker=marker
-        centerMapOnLocation(location: marker.position, zoom: 11)
-        print("MARKER:\(String(describing: marker.userData))")
+        if let markerId = marker.userData {
+            self.selectedMarker = marker
+            
+            self.viewModel?.getStopInfo(id: markerId as! Int)
+        }
         return true
     }
 }

@@ -34,6 +34,7 @@
 		DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217C23EACAC500D4E57B /* GmapsController.swift */; };
 		DAFB217F23EB135F00D4E57B /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217E23EB135F00D4E57B /* Array+Extension.swift */; };
 		DAFB218223EB496800D4E57B /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB218123EB496800D4E57B /* MapViewModel.swift */; };
+		DAFB218423EC036C00D4E57B /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB218323EC036C00D4E57B /* DateFormatter+Extension.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -91,6 +92,7 @@
 		DAFB217C23EACAC500D4E57B /* GmapsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmapsController.swift; sourceTree = "<group>"; };
 		DAFB217E23EB135F00D4E57B /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		DAFB218123EB496800D4E57B /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
+		DAFB218323EC036C00D4E57B /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
 		DDFAFA19F217DED80F10C3AC /* Pods-seat-code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.release.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.release.xcconfig"; sourceTree = "<group>"; };
 		EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_codeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -248,6 +250,7 @@
 			children = (
 				DA38878823E852E700EDEBFC /* String+Extension.swift */,
 				DA38878A23E8577400EDEBFC /* Date+Extension.swift */,
+				DAFB218323EC036C00D4E57B /* DateFormatter+Extension.swift */,
 				DAFB217E23EB135F00D4E57B /* Array+Extension.swift */,
 			);
 			path = Extensions;
@@ -517,6 +520,7 @@
 				141580F123E6DC6E009F9218 /* Trip.swift in Sources */,
 				141580BF23E6CF1C009F9218 /* MainViewController.swift in Sources */,
 				141580FF23E738A7009F9218 /* DataProvider.swift in Sources */,
+				DAFB218423EC036C00D4E57B /* DateFormatter+Extension.swift in Sources */,
 				141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */,
 				141580F323E6E37B009F9218 /* Stop.swift in Sources */,
 				DA38878923E852E700EDEBFC /* String+Extension.swift in Sources */,
@@ -706,7 +710,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W6N5FUJ8BW;
 				INFOPLIST_FILE = "seat-code/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -724,7 +730,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = W6N5FUJ8BW;
 				INFOPLIST_FILE = "seat-code/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

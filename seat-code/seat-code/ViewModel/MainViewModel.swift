@@ -7,10 +7,10 @@
 //
 
 import GoogleMaps
+import Polyline
 import RxCocoa
 import RxSwift
 import SwiftyJSON
-import Polyline
 
 class MainViewModel {
     // MARK: - Constants
@@ -39,25 +39,46 @@ class MainViewModel {
             guard let `self` = self else { return }
             switch result {
             case .success(let json):
-                let tmpTrips = json.arrayValue.compactMap {
-                    Trip(description: $0["description"].stringValue,
-                         driverName: $0["driverName"].stringValue,
-                         startTime: $0["startTime"].stringValue.toDate(),
-                         endTime: $0["endTime"].stringValue.toDate(),
-                         routeString: $0["route"].stringValue,
-                         routeCoords: self.getTripCoords(trip: $0),
-                         status: self.getTripStatus(trip: $0),
-                         stops: self.getTripStops(trip: $0),
-                         origin: self.getTripOrigin(trip: $0),
-                         destination: self.getTripDestination(trip: $0))
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.parseDateFormat)
+                
+                do {
+                    let tmpTrips: [Trip] = try decoder.decode([Trip].self, from: json.rawData())
+                    var parsedTrips: [Trip] = []
+                    for trip in tmpTrips {
+                        let coords: [CLLocationCoordinate2D] = self.getTripCoords(route: trip.route)
+                        var tmpTrip = trip
+                        tmpTrip.coords = coords
+                        tmpTrip.stops = self.cleanStopsArray(stops: trip.stops)
+                        parsedTrips.append(tmpTrip)
+                    }
+                    
+                    self.trips.onNext(parsedTrips)
+                } catch let DecodingError.dataCorrupted(context) {
+                    print(context)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.keyNotFound(key, context) {
+                    print("Key '\(key)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.valueNotFound(value, context) {
+                    print("Value '\(value)' not found:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch let DecodingError.typeMismatch(type, context) {
+                    print("Type '\(type)' mismatch:", context.debugDescription)
+                    print("codingPath:", context.codingPath)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
+                } catch {
+                    print("error: ", error)
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
                 }
-                self.trips.onNext(tmpTrips)
             case .failure(let failure):
                 switch failure {
                 case .invalidResponse:
                     self.requestError.onNext("No hemos podido cargar las rutas, por favor inténtalo más tarde.")
                 case .serverError:
-                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde")
+                    self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 2)")
                 case .unknownError:
                     self.requestError.onNext("Se ha producido un error, por favor inténtalo más tarde.")
                 default:
@@ -70,49 +91,17 @@ class MainViewModel {
     
     // MARK: - Private methods
     
-    private func getTripCoords(trip: JSON) -> [CLLocationCoordinate2D] {
-        return decodePolyline(trip["route"].stringValue) ?? []
+    private func getTripCoords(route: String) -> [CLLocationCoordinate2D] {
+        return decodePolyline(route) ?? []
     }
     
-    private func getTripStatus(trip: JSON) -> RouteStatus {
-        var status: RouteStatus
-        
-        switch trip["status"].stringValue {
-        case "ongoing":
-            status = .ongoing
-        case "scheduled":
-            status = .scheduled
-        case "finalized":
-            status = .finalized
-        case "cancelled":
-            status = .canceled
-        default:
-            status = .idle
+    private func cleanStopsArray(stops: [TripStop]) -> [TripStop] {
+        var tmpStops: [TripStop] = []
+        for stop in stops {
+            if let id = stop.id, let point = stop.point {
+                tmpStops.append(TripStop(id: id, point: point))
+            }
         }
-        return status
-    }
-    
-    private func getTripStops(trip: JSON) -> [Stop] {
-        let stops = trip["stops"].arrayValue.compactMap {
-            Stop(id: $0["id"].intValue, stopTime: "", paid: false,
-                 point: MapPoint(point: Point(latitude: $0["point"]["_latitude"].floatValue, longitude: $0["point"]["_longitude"].floatValue), address: ""),
-                 tripId: 0, username: "", price: 0.0)
-        }
-        
-        return stops
-    }
-    
-    private func getTripOrigin(trip: JSON) -> MapPoint {
-        let origin = MapPoint(point: Point(latitude: trip["origin"]["point"]["_latitude"].floatValue,
-                                           longitude: trip["origin"]["point"]["_longitude"].floatValue),
-                              address: trip["origin"]["address"].stringValue)
-        return origin
-    }
-    
-    private func getTripDestination(trip: JSON) -> MapPoint {
-        let destination = MapPoint(point: Point(latitude: trip["destination"]["point"]["_latitude"].floatValue,
-                                                longitude: trip["destination"]["point"]["_longitude"].floatValue),
-                                   address: trip["destination"]["address"].stringValue)
-        return destination
+        return tmpStops
     }
 }

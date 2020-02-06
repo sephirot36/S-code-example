@@ -21,4 +21,3 @@ protocol MapControllerProtocol {
     
     func drawLine(points: [CLLocationCoordinate2D])
 }
-

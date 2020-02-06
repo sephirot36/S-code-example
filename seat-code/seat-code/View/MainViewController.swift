@@ -74,14 +74,19 @@ class MainViewController: UIViewController {
         self.tableView.rx.modelSelected(Trip.self)
             .subscribe(onNext: { [weak self] trip in
                 self?.mapController.clearMap()
-                self?.mapController.drawLine(points: trip.routeCoords)
-                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point.latitude), longitude: CLLocationDegrees(trip.origin.point.longitude)), icon: nil)
-                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point.latitude), longitude: CLLocationDegrees(trip.destination.point.longitude)), icon: nil)
-                self?.mapController.centerMapBetweenPoints(origin: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point.latitude),
-                                                                                          longitude: CLLocationDegrees(trip.origin.point.longitude)), end: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point.latitude), longitude: CLLocationDegrees(trip.destination.point.longitude)))
+                self?.mapController.drawLine(points: trip.coords ?? [])
+                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point._latitude), longitude: CLLocationDegrees(trip.origin.point._longitude)), icon: nil)
+                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point._latitude), longitude: CLLocationDegrees(trip.destination.point._longitude)), icon: nil)
+                self?.mapController.centerMapBetweenPoints(origin: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point._latitude),
+                                                                                          longitude: CLLocationDegrees(trip.origin.point._longitude)), end: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point._latitude), longitude: CLLocationDegrees(trip.destination.point._longitude)))
 
                 for stop in trip.stops {
-                    self?.mapController.createMarkerAtLocationWithId(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(stop.point.point.latitude), longitude: CLLocationDegrees(stop.point.point.longitude)), icon: GMSMarker.markerImage(with: .orange), id: stop.id)
+                    self?.mapController.createMarkerAtLocationWithId(
+                        location: CLLocationCoordinate2D(
+                            latitude: CLLocationDegrees(stop.point?._latitude ?? 0.0),
+                            longitude: CLLocationDegrees(stop.point?._longitude ?? 0.0)),
+                        icon: GMSMarker.markerImage(with: .orange),
+                        id: stop.id ?? -1)
                 }
             }).disposed(by: self.disposeBag)
     }
