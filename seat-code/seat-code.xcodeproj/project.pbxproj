@@ -17,7 +17,6 @@
 		141580E023E6CF1F009F9218 /* seat_codeUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580DF23E6CF1F009F9218 /* seat_codeUITests.swift */; };
 		141580F123E6DC6E009F9218 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F023E6DC6E009F9218 /* Trip.swift */; };
 		141580F323E6E37B009F9218 /* Stop.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F223E6E37B009F9218 /* Stop.swift */; };
-		141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F423E6E3B7009F9218 /* MapPoint.swift */; };
 		141580F723E6E969009F9218 /* Point.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F623E6E969009F9218 /* Point.swift */; };
 		141580F923E73325009F9218 /* MainViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580F823E73325009F9218 /* MainViewModel.swift */; };
 		141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580FB23E7379B009F9218 /* ResourcesApi.swift */; };
@@ -71,7 +70,6 @@
 		141580E123E6CF1F009F9218 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		141580F023E6DC6E009F9218 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		141580F223E6E37B009F9218 /* Stop.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stop.swift; sourceTree = "<group>"; };
-		141580F423E6E3B7009F9218 /* MapPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapPoint.swift; sourceTree = "<group>"; };
 		141580F623E6E969009F9218 /* Point.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Point.swift; sourceTree = "<group>"; };
 		141580F823E73325009F9218 /* MainViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModel.swift; sourceTree = "<group>"; };
 		141580FB23E7379B009F9218 /* ResourcesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesApi.swift; sourceTree = "<group>"; };
@@ -220,7 +218,6 @@
 			children = (
 				141580F023E6DC6E009F9218 /* Trip.swift */,
 				141580F223E6E37B009F9218 /* Stop.swift */,
-				141580F423E6E3B7009F9218 /* MapPoint.swift */,
 				141580F623E6E969009F9218 /* Point.swift */,
 			);
 			path = Model;
@@ -532,7 +529,6 @@
 				DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */,
 				DA38878B23E8577400EDEBFC /* Date+Extension.swift in Sources */,
 				141580F923E73325009F9218 /* MainViewModel.swift in Sources */,
-				141580F523E6E3B7009F9218 /* MapPoint.swift in Sources */,
 				DAFB218223EB496800D4E57B /* MapViewModel.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -18,6 +18,7 @@ class GmapsController: UIViewController, MapControllerProtocol {
     // MARK: - Constants
     
     let disposeBag = DisposeBag()
+    let mapZoom: Float = 11
     
     // MARK: - Variables
     
@@ -43,9 +44,15 @@ class GmapsController: UIViewController, MapControllerProtocol {
         viewModel.stopInfo
             .subscribe(onNext: { [weak self] stopInfo in
                 guard let `self` = self else { return }
-                print("STOOOOOOP:\(stopInfo)")
                 self.openMarkerInfo(title: stopInfo.address, snippet: stopInfo.userName)
             }).disposed(by: self.disposeBag)
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alert.addAction(closeAction)
+        self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: MapControllerProtocol conformance
@@ -93,19 +100,23 @@ class GmapsController: UIViewController, MapControllerProtocol {
     }
     
     func openMarkerInfo(title: String, snippet: String) {
-        selectedMarker.title = title
-        selectedMarker.snippet = snippet
-        selectedMarker.tracksInfoWindowChanges = true
-        mapView.selectedMarker = selectedMarker
-        self.centerMapOnLocation(location: selectedMarker.position, zoom: 11)
+        self.selectedMarker.title = title
+        self.selectedMarker.snippet = snippet
+        self.selectedMarker.tracksInfoWindowChanges = true
+        self.mapView.selectedMarker = self.selectedMarker
+        self.centerMapOnLocation(location: self.selectedMarker.position, zoom: mapZoom)
     }
 }
 
 extension GmapsController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerId = marker.userData {
+            marker.tracksInfoWindowChanges = true
+            marker.title = "Cargando..."
+            marker.snippet = nil
+            self.centerMapOnLocation(location: marker.position, zoom: mapZoom)
+            self.mapView.selectedMarker = marker
             self.selectedMarker = marker
-            
             self.viewModel?.getStopInfo(id: markerId as! Int)
         }
         return true

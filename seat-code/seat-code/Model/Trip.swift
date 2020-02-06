@@ -15,8 +15,6 @@ enum RouteStatus: String {
     case canceled
 }
 
-
-// TODO: How to var coords: [CLLocationCoordinate2D]? can conform Decodable?
 struct Trip: Codable {
     var destination: TripLocation
     var endTime: Date
