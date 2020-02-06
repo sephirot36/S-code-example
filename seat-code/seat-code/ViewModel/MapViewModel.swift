@@ -57,6 +57,7 @@ class MapViewModel {
                     self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
                 }
             case .failure(let failure):
+                // TODO: CHECK ERRORS
                 print(failure)
                 switch failure {
                 case .invalidResponse:

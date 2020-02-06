@@ -44,7 +44,15 @@ class GmapsController: UIViewController, MapControllerProtocol {
         viewModel.stopInfo
             .subscribe(onNext: { [weak self] stopInfo in
                 guard let `self` = self else { return }
-                self.openMarkerInfo(title: stopInfo.address, snippet: stopInfo.userName)
+                let snippet = "\(stopInfo.userName) (\(self.getDate(stop: stopInfo)))"
+                self.openMarkerInfo(title: stopInfo.address, snippet: snippet)
+            }).disposed(by: self.disposeBag)
+        
+        viewModel.requestError
+            .subscribe(onNext: { [weak self] requestError in
+                guard let `self` = self else { return }
+                self.clearMarkerInfo()
+                self.showAlert(message: requestError)
             }).disposed(by: self.disposeBag)
     }
     
@@ -53,6 +61,31 @@ class GmapsController: UIViewController, MapControllerProtocol {
         let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func getDate(stop: Stop) -> String {
+        let date = stop.stopTime
+        var calendar = Calendar.current
+        
+        if let timeZone = TimeZone(identifier: "Europe/London") {
+            calendar.timeZone = timeZone
+            calendar.locale = Locale(identifier: "en_US")
+        }
+        
+        let hour = calendar.component(.hour, from: date)
+        let minute = calendar.component(.minute, from: date)
+        
+        var hourValue = "\(hour)"
+        if hour < 10 {
+            hourValue = "0\(hour)"
+        }
+        
+        var minuteValue = "\(minute)"
+        if minute < 10 {
+            minuteValue = "0\(minute)"
+        }
+        
+        return "\(hourValue):\(minuteValue)"
     }
     
     // MARK: MapControllerProtocol conformance
@@ -104,7 +137,11 @@ class GmapsController: UIViewController, MapControllerProtocol {
         self.selectedMarker.snippet = snippet
         self.selectedMarker.tracksInfoWindowChanges = true
         self.mapView.selectedMarker = self.selectedMarker
-        self.centerMapOnLocation(location: self.selectedMarker.position, zoom: mapZoom)
+        self.centerMapOnLocation(location: self.selectedMarker.position, zoom: self.mapZoom)
+    }
+    
+    func clearMarkerInfo() {
+        mapView.selectedMarker = nil
     }
 }
 
@@ -114,7 +151,7 @@ extension GmapsController: GMSMapViewDelegate {
             marker.tracksInfoWindowChanges = true
             marker.title = "Cargando..."
             marker.snippet = nil
-            self.centerMapOnLocation(location: marker.position, zoom: mapZoom)
+            self.centerMapOnLocation(location: marker.position, zoom: self.mapZoom)
             self.mapView.selectedMarker = marker
             self.selectedMarker = marker
             self.viewModel?.getStopInfo(id: markerId as! Int)
