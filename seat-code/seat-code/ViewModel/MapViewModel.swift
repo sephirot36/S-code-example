@@ -1,40 +1,32 @@
 //
-//  MainViewModel.swift
+//  MapViewModel.swift
 //  seat-code
 //
-//  Created by Daniel Castro muñoz on 02/02/2020.
+//  Created by Daniel Castro on 05/02/2020.
 //  Copyright © 2020 Sephirot36. All rights reserved.
 //
-
-import GoogleMaps
-import Polyline
 import RxCocoa
 import RxSwift
-import SwiftyJSON
 
-class MainViewModel {
+class MapViewModel {
     // MARK: - Constants
     
     private let resourcesApi: ResourcesApi
     private let disposeBag = DisposeBag()
     
-    let trips = PublishSubject<[Trip]>()
-    let isLoading = PublishSubject<Bool>()
+    let stopInfo = PublishSubject<Stop>()
     let requestError = PublishSubject<String>()
     
     // MARK: - Initializer
     
     init(resourcesApi: ResourcesApi) {
         self.resourcesApi = resourcesApi
-        // subscribes()
-        getTrips()
     }
     
     // MARK: - Public methods
     
-    public func getTrips() {
-        isLoading.onNext(true)
-        resourcesApi.getTrips { [weak self]
+    public func getStopInfo(id: Int) {
+        resourcesApi.getStopInfo(id: id) { [weak self]
             result in
             guard let `self` = self else { return }
             switch result {
@@ -43,17 +35,8 @@ class MainViewModel {
                 decoder.dateDecodingStrategy = .formatted(DateFormatter.parseDateFormat)
                 
                 do {
-                    let tmpTrips: [Trip] = try decoder.decode([Trip].self, from: json.rawData())
-                    var parsedTrips: [Trip] = []
-                    for trip in tmpTrips {
-                        let coords: [CLLocationCoordinate2D] = self.getTripCoords(route: trip.route)
-                        var tmpTrip = trip
-                        tmpTrip.coords = coords
-                        tmpTrip.stops = self.cleanStopsArray(stops: trip.stops)
-                        parsedTrips.append(tmpTrip)
-                    }
-                    
-                    self.trips.onNext(parsedTrips)
+                    let stop = try decoder.decode(Stop.self, from: json.rawData())
+                    self.stopInfo.onNext(stop)
                 } catch let DecodingError.dataCorrupted(context) {
                     print(context)
                     self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
@@ -74,34 +57,20 @@ class MainViewModel {
                     self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 1)")
                 }
             case .failure(let failure):
+                // TODO: CHECK ERRORS
+                print(failure)
                 switch failure {
                 case .invalidResponse:
-                    self.requestError.onNext("No hemos podido cargar las rutas, por favor inténtalo más tarde.")
+                    self.requestError.onNext("No hemos podido cargar la información de la parada, por favor inténtalo más tarde.")
                 case .serverError:
                     self.requestError.onNext("Tenemos problemas en nuestro servicio, por favor inténtalo más tarde. (ERROR CODE: 2)")
                 case .unknownError:
                     self.requestError.onNext("Se ha producido un error, por favor inténtalo más tarde.")
                 default:
-                    self.requestError.onNext("No hemos podido cargar las rutas, por favor inténtalo más tarde.")
+                    self.requestError.onNext("No hemos podido cargar la información de la parada, por favor inténtalo más tarde.")
                 }
             }
-            self.isLoading.onNext(false)
+            // self.isLoading.onNext(false)
         }
-    }
-    
-    // MARK: - Private methods
-    
-    private func getTripCoords(route: String) -> [CLLocationCoordinate2D] {
-        return decodePolyline(route) ?? []
-    }
-    
-    private func cleanStopsArray(stops: [TripStop]) -> [TripStop] {
-        var tmpStops: [TripStop] = []
-        for stop in stops {
-            if let id = stop.id, let point = stop.point {
-                tmpStops.append(TripStop(id: id, point: point))
-            }
-        }
-        return tmpStops
     }
 }

@@ -7,7 +7,7 @@
 //
 import CoreLocation
 
-enum RouteStatus {
+enum RouteStatus: String {
     case idle
     case ongoing
     case scheduled
@@ -15,15 +15,40 @@ enum RouteStatus {
     case canceled
 }
 
-struct Trip {
+struct Trip: Codable {
+    var destination: TripLocation
+    var endTime: Date
+    var startTime: Date
     var description: String
     var driverName: String
-    var startTime: Date
-    var endTime: Date
-    var routeString: String
-    var routeCoords: [CLLocationCoordinate2D]
-    var status: RouteStatus
-    var stops: [Stop]
-    var origin: MapPoint
-    var destination: MapPoint
+    var route: String
+    var status: String
+    var origin: TripLocation
+    var stops: [TripStop]
+    var coords: [CLLocationCoordinate2D]?
+}
+
+struct TripStop: Codable {
+    var id: Int?
+    var point: Point?
+}
+
+struct TripLocation: Codable {
+    var address: String
+    var point: Point
+}
+
+extension CLLocationCoordinate2D: Codable {
+    public func encode(to encoder: Encoder) throws {
+        var container = encoder.unkeyedContainer()
+        try container.encode(longitude)
+        try container.encode(latitude)
+    }
+     
+    public init(from decoder: Decoder) throws {
+        var container = try decoder.unkeyedContainer()
+        let longitude = try container.decode(CLLocationDegrees.self)
+        let latitude = try container.decode(CLLocationDegrees.self)
+        self.init(latitude: latitude, longitude: longitude)
+    }
 }

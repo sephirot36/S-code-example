@@ -20,7 +20,7 @@ class TripTableViewCell: UITableViewCell {
     public var cellTrip: Trip! {
         didSet {
             self.tripStatus.layer.cornerRadius = self.tripStatus.frame.width / 2
-            self.tripStatus.backgroundColor = self.getStatusIcon(status: self.cellTrip.status)
+            self.tripStatus.backgroundColor = self.getStatusIcon(status: RouteStatus(rawValue: self.cellTrip!.status) ?? .idle)
             self.tripDescription.text = self.cellTrip.description
             self.tripInfo.attributedText = self.getTripInfo(trip: self.cellTrip)
         }
@@ -60,6 +60,8 @@ class TripTableViewCell: UITableViewCell {
     }
     
     private func getTripInfo(trip: Trip) -> NSMutableAttributedString {
+        
+        // TODO : CHECK IF INFO IS CORRECT :S
         let startTime = trip.startTime.toString(dateFormat: "HH:mm")
         
         let timeDifference = self.getTimeDifference(start: trip.startTime, end: trip.endTime)
