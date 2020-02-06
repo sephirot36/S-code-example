@@ -22,6 +22,8 @@
 		141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580FB23E7379B009F9218 /* ResourcesApi.swift */; };
 		141580FF23E738A7009F9218 /* DataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 141580FE23E738A7009F9218 /* DataProvider.swift */; };
 		1415810123E738CF009F9218 /* NetworkProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810023E738CF009F9218 /* NetworkProvider.swift */; };
+		1415810423ECA00E009F9218 /* ContactFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810323ECA00E009F9218 /* ContactFormViewController.xib */; };
+		1415810623ECBCE3009F9218 /* ContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810523ECBCE3009F9218 /* ContactFormViewController.swift */; };
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
@@ -75,6 +77,8 @@
 		141580FB23E7379B009F9218 /* ResourcesApi.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesApi.swift; sourceTree = "<group>"; };
 		141580FE23E738A7009F9218 /* DataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataProvider.swift; sourceTree = "<group>"; };
 		1415810023E738CF009F9218 /* NetworkProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkProvider.swift; sourceTree = "<group>"; };
+		1415810323ECA00E009F9218 /* ContactFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactFormViewController.xib; sourceTree = "<group>"; };
+		1415810523ECBCE3009F9218 /* ContactFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFormViewController.swift; sourceTree = "<group>"; };
 		33B1F74E84A33902E41B9D3A /* Pods-seat-codeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.release.xcconfig"; sourceTree = "<group>"; };
 		40087BAB39A5296257128430 /* Pods-seat-codeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2BE8622AB3682129542829 /* Pods-seat-code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.debug.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.debug.xcconfig"; sourceTree = "<group>"; };
@@ -197,9 +201,11 @@
 		141580ED23E6D11B009F9218 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				1415810223EC9FF2009F9218 /* Xib */,
 				DAFB217B23EACAAB00D4E57B /* MapController */,
 				DA38878423E8343000EDEBFC /* TableViewCells */,
 				141580BE23E6CF1C009F9218 /* MainViewController.swift */,
+				1415810523ECBCE3009F9218 /* ContactFormViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -231,6 +237,14 @@
 				1415810023E738CF009F9218 /* NetworkProvider.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		1415810223EC9FF2009F9218 /* Xib */ = {
+			isa = PBXGroup;
+			children = (
+				1415810323ECA00E009F9218 /* ContactFormViewController.xib */,
+			);
+			path = Xib;
 			sourceTree = "<group>";
 		};
 		DA38878423E8343000EDEBFC /* TableViewCells */ = {
@@ -383,6 +397,7 @@
 			files = (
 				DA38878623E8345E00EDEBFC /* TripTableViewCell.xib in Resources */,
 				141580CA23E6CF1F009F9218 /* LaunchScreen.storyboard in Resources */,
+				1415810423ECA00E009F9218 /* ContactFormViewController.xib in Resources */,
 				141580C723E6CF1F009F9218 /* Assets.xcassets in Resources */,
 				141580C223E6CF1D009F9218 /* Main.storyboard in Resources */,
 			);
@@ -518,6 +533,7 @@
 				141580BF23E6CF1C009F9218 /* MainViewController.swift in Sources */,
 				141580FF23E738A7009F9218 /* DataProvider.swift in Sources */,
 				DAFB218423EC036C00D4E57B /* DateFormatter+Extension.swift in Sources */,
+				1415810623ECBCE3009F9218 /* ContactFormViewController.swift in Sources */,
 				141580FC23E7379B009F9218 /* ResourcesApi.swift in Sources */,
 				141580F323E6E37B009F9218 /* Stop.swift in Sources */,
 				DA38878923E852E700EDEBFC /* String+Extension.swift in Sources */,

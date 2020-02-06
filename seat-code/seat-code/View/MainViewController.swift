@@ -17,6 +17,7 @@ class MainViewController: UIViewController {
     @IBOutlet var mapContainer: UIView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var reportButton: UIButton!
 
     // MARK: - Constants
 
@@ -53,6 +54,8 @@ class MainViewController: UIViewController {
             return children.firstMatchingType()!
         }
         self.mapController = mapCont
+        
+        reportButton.addTarget(self, action: #selector(showContactForm), for: .touchUpInside)
     }
 
     private func binds() {
@@ -115,6 +118,12 @@ class MainViewController: UIViewController {
         let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - IBActions
+    @objc func showContactForm(sender: UIButton!) {
+       let settingVC : ContactFormViewController = ContactFormViewController(nibName :"ContactFormViewController",bundle : nil)
+        self.show(settingVC, sender: nil)
     }
 }
 
