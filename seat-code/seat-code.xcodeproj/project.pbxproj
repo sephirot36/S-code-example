@@ -36,6 +36,7 @@
 		DAFB217F23EB135F00D4E57B /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217E23EB135F00D4E57B /* Array+Extension.swift */; };
 		DAFB218223EB496800D4E57B /* MapViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB218123EB496800D4E57B /* MapViewModel.swift */; };
 		DAFB218423EC036C00D4E57B /* DateFormatter+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB218323EC036C00D4E57B /* DateFormatter+Extension.swift */; };
+		DAFB218823ED841800D4E57B /* Issue.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB218723ED841800D4E57B /* Issue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -95,6 +96,7 @@
 		DAFB217E23EB135F00D4E57B /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
 		DAFB218123EB496800D4E57B /* MapViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewModel.swift; sourceTree = "<group>"; };
 		DAFB218323EC036C00D4E57B /* DateFormatter+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "DateFormatter+Extension.swift"; sourceTree = "<group>"; };
+		DAFB218723ED841800D4E57B /* Issue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Issue.swift; sourceTree = "<group>"; };
 		DDFAFA19F217DED80F10C3AC /* Pods-seat-code.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.release.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.release.xcconfig"; sourceTree = "<group>"; };
 		EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_codeTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -225,6 +227,7 @@
 				141580F023E6DC6E009F9218 /* Trip.swift */,
 				141580F223E6E37B009F9218 /* Stop.swift */,
 				141580F623E6E969009F9218 /* Point.swift */,
+				DAFB218723ED841800D4E57B /* Issue.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -542,6 +545,7 @@
 				141580F723E6E969009F9218 /* Point.swift in Sources */,
 				1415810123E738CF009F9218 /* NetworkProvider.swift in Sources */,
 				141580BD23E6CF1C009F9218 /* AppDelegate.swift in Sources */,
+				DAFB218823ED841800D4E57B /* Issue.swift in Sources */,
 				DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */,
 				DA38878B23E8577400EDEBFC /* Date+Extension.swift in Sources */,
 				141580F923E73325009F9218 /* MainViewModel.swift in Sources */,

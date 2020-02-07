@@ -7,11 +7,13 @@
 //
 
 import UIKit
+import RealmSwift
 
 class ContactFormViewController: UIViewController {
    
     // MARK: - Constants
      let maxDescriptionChars: Int = 200
+     let realm = try! Realm()
     
     // MARK: - @IBOutlets
     
@@ -57,13 +59,22 @@ class ContactFormViewController: UIViewController {
         inputDescription.delegate = self
     }
     
+    private func sendIssue(issue: Issue){
+        // Save your object
+        realm.beginWrite()
+        realm.add(issue)
+        try! realm.commitWrite()
+    }
+    
     // MARK: - IBActions
     
     @objc func cancelAction(sender: UIButton!) {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func sendAction(sender: UIButton!) {}
+    @objc func sendAction(sender: UIButton!) {
+        
+    }
 }
 
 extension ContactFormViewController: UITextFieldDelegate {
@@ -96,6 +107,6 @@ extension ContactFormViewController: UITextViewDelegate {
         
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         let numberOfChars = newText.count
-        return numberOfChars < maxDescriptionChars    // 10 Limit Value
+        return numberOfChars < maxDescriptionChars
     }
 }
