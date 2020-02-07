@@ -6,14 +6,14 @@
 //  Copyright © 2020 Sephirot36. All rights reserved.
 //
 
-import UIKit
 import RealmSwift
+import UIKit
 
 class ContactFormViewController: UIViewController {
-   
     // MARK: - Constants
-     let maxDescriptionChars: Int = 200
-     let realm = try! Realm()
+    
+    let maxDescriptionChars: Int = 200
+    let realm = try! Realm()
     
     // MARK: - @IBOutlets
     
@@ -59,21 +59,74 @@ class ContactFormViewController: UIViewController {
         inputDescription.delegate = self
     }
     
-    private func sendIssue(issue: Issue){
+    private func saveIssue(issue: Issue) {
         // Save your object
         realm.beginWrite()
         realm.add(issue)
         try! realm.commitWrite()
     }
     
-    // MARK: - IBActions
-    
-    @objc func cancelAction(sender: UIButton!) {
+    private func closeView() {
         dismiss(animated: true, completion: nil)
     }
     
-    @objc func sendAction(sender: UIButton!) {
+    private func checkEmptyString(string: String?) -> Bool {
+        guard let string = string else {
+            return false
+        }
+        return !string.isEmpty
+    }
+    
+    private func isValidForm() -> Bool {
         
+        let validName = checkEmptyString(string: inputName.text)
+        let validSurname = checkEmptyString(string: inputSurname.text)
+        // TODO: Check correct email syntax with RegEx
+        let validMail = checkEmptyString(string: inputMail.text)
+        let validDesc = checkEmptyString(string: inputDescription.text)
+        
+        if validName, validSurname, validMail, validDesc {
+            return true
+        } else {
+            return false
+        }
+    }
+    
+    private func showAlert(message: String) {
+        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
+        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        alert.addAction(closeAction)
+        self.present(alert, animated: true, completion: nil)
+    }
+    
+    private func updateBadge() {
+        let issues = realm.objects(Issue.self)
+        let application = UIApplication.shared
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil
+        ))
+        
+        application.applicationIconBadgeNumber = issues.count
+    }
+    
+    // MARK: - IBActions
+    
+    @objc func cancelAction(sender: UIButton!) {
+        closeView()
+    }
+    
+    @objc func sendAction(sender: UIButton!) {
+        if isValidForm() {
+            let issue = Issue()
+            issue.userName = inputName.text ?? ""
+            issue.userSurname = inputSurname.text ?? ""
+            issue.userEmail = inputMail.text ?? ""
+            issue.userPhone = inputPhone.text ?? ""
+            issue.userIssueDescription = inputDescription.text ?? ""
+            self.saveIssue(issue: issue)
+            self.updateBadge()
+        } else {
+            self.showAlert(message: "Debes rellenar los campos obligatorios")
+        }
     }
 }
 
@@ -98,6 +151,7 @@ extension ContactFormViewController: UITextFieldDelegate {
 }
 
 extension ContactFormViewController: UITextViewDelegate {
+    // MARK: UITextViewDelegate conformance
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
