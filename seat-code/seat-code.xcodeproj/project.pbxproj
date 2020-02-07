@@ -167,6 +167,7 @@
 			children = (
 				DA38878723E8525B00EDEBFC /* Extensions */,
 				141580FA23E73728009F9218 /* Data */,
+				1415810223EC9FF2009F9218 /* Xib */,
 				141580ED23E6D11B009F9218 /* View */,
 				141580EE23E6D131009F9218 /* ViewModel */,
 				141580EF23E6D13E009F9218 /* Model */,
@@ -201,7 +202,6 @@
 		141580ED23E6D11B009F9218 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				1415810223EC9FF2009F9218 /* Xib */,
 				DAFB217B23EACAAB00D4E57B /* MapController */,
 				DA38878423E8343000EDEBFC /* TableViewCells */,
 				141580BE23E6CF1C009F9218 /* MainViewController.swift */,

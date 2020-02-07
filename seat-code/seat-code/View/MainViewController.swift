@@ -122,8 +122,10 @@ class MainViewController: UIViewController {
     
     // MARK: - IBActions
     @objc func showContactForm(sender: UIButton!) {
-       let settingVC : ContactFormViewController = ContactFormViewController(nibName :"ContactFormViewController",bundle : nil)
-        self.show(settingVC, sender: nil)
+        
+        self.show(ContactFormViewController(), sender: nil)
+//       let settingVC : ContactFormViewController = ContactFormViewController(nibName :"ContactFormViewController",bundle : nil)
+//        self.show(settingVC, sender: nil)
     }
 }
 
