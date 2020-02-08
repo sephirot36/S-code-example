@@ -11,12 +11,13 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     // MARK: - @IBOutlets
 
     @IBOutlet var mapContainer: UIView!
     @IBOutlet var tableView: UITableView!
     @IBOutlet var loadingIndicator: UIActivityIndicatorView!
+    @IBOutlet var reportButton: UIButton!
 
     // MARK: - Constants
 
@@ -53,6 +54,8 @@ class MainViewController: UIViewController {
             return children.firstMatchingType()!
         }
         self.mapController = mapCont
+        
+        reportButton.addTarget(self, action: #selector(showContactForm), for: .touchUpInside)
     }
 
     private func binds() {
@@ -112,9 +115,14 @@ class MainViewController: UIViewController {
 
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        let closeAction = UIAlertAction(title: "Cerrar", style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
+    }
+    
+    // MARK: - IBActions
+    @objc func showContactForm(sender: UIButton!) {
+        showVC(vc: ContactFormViewController())
     }
 }
 

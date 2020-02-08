@@ -6,6 +6,11 @@ PODS:
   - GoogleMaps/Maps (3.7.0):
     - GoogleMaps/Base
   - Polyline (4.2.1)
+  - Realm (4.3.0):
+    - Realm/Headers (= 4.3.0)
+  - Realm/Headers (4.3.0)
+  - RealmSwift (4.3.0):
+    - Realm (= 4.3.0)
   - RxCocoa (5.0.1):
     - RxRelay (~> 5)
     - RxSwift (~> 5)
@@ -19,6 +24,7 @@ DEPENDENCIES:
   - Alamofire
   - GoogleMaps
   - Polyline (~> 4.0)
+  - RealmSwift
   - RxCocoa
   - RxSwift
   - SwiftLint
@@ -29,6 +35,8 @@ SPEC REPOS:
     - Alamofire
     - GoogleMaps
     - Polyline
+    - Realm
+    - RealmSwift
     - RxCocoa
     - RxRelay
     - RxSwift
@@ -39,12 +47,14 @@ SPEC CHECKSUMS:
   Alamofire: 85e8a02c69d6020a0d734f6054870d7ecb75cf18
   GoogleMaps: 55da829c68aa931f3ae982b9e341cc2f3d89c587
   Polyline: 0e9890790292741c8186201a536b6bb6a78d02dd
+  Realm: 9357c3589555793e1860a7104a7412bca4a48d99
+  RealmSwift: 402f1e379a8ef82c635313037b043f0f06de880c
   RxCocoa: e741b9749968e8a143e2b787f1dfbff2b63d0a5c
   RxRelay: 89d54507f4fd4d969e6ec1d4bd7f3673640b4640
   RxSwift: e2dc62b366a3adf6a0be44ba9f405efd4c94e0c4
   SwiftLint: 8f5d2f903e1c9bcbc832fd16771e80a263ac6cbb
   SwiftyJSON: 36413e04c44ee145039d332b4f4e2d3e8d6c4db7
 
-PODFILE CHECKSUM: 694f6f55e7bba1a985dcd0014bbe6a1182d7f718
+PODFILE CHECKSUM: c7a8d1b5897f250f25865a3ee8313e9117e2e659
 
 COCOAPODS: 1.7.5

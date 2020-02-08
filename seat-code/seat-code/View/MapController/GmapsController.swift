@@ -10,7 +10,7 @@ import GoogleMaps
 import RxCocoa
 import RxSwift
 
-class GmapsController: UIViewController, MapControllerProtocol {
+class GmapsController: BaseViewController, MapControllerProtocol {
     // MARK: - @IBOutlets
     
     @IBOutlet var mapView: GMSMapView!
@@ -19,6 +19,7 @@ class GmapsController: UIViewController, MapControllerProtocol {
     
     let disposeBag = DisposeBag()
     let mapZoom: Float = 11
+    let loadingText = "Cargando..."
     
     // MARK: - Variables
     
@@ -52,15 +53,12 @@ class GmapsController: UIViewController, MapControllerProtocol {
             .subscribe(onNext: { [weak self] requestError in
                 guard let `self` = self else { return }
                 self.clearMarkerInfo()
-                self.showAlert(message: requestError)
+                let extraAction = UIAlertAction(title: "Reportar incidencia", style: .default) { (_: UIAlertAction) in
+                    self.showVC(vc: ContactFormViewController())
+                }
+                self.showAlertWithAction(title: "Algo ha sucedido", message: requestError, closeButtonTitle: "Cerrar", extraAction: extraAction)
+                // self.showAlert(message: requestError, closeButtonTitle: "Cerrar" )
             }).disposed(by: self.disposeBag)
-    }
-    
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-        alert.addAction(closeAction)
-        self.present(alert, animated: true, completion: nil)
     }
     
     private func getDate(stop: Stop) -> String {
@@ -141,7 +139,7 @@ class GmapsController: UIViewController, MapControllerProtocol {
     }
     
     func clearMarkerInfo() {
-        mapView.selectedMarker = nil
+        self.mapView.selectedMarker = nil
     }
 }
 
@@ -149,14 +147,14 @@ extension GmapsController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerId = marker.userData {
             marker.tracksInfoWindowChanges = true
-            marker.title = "Cargando..."
+            marker.title = loadingText
             marker.snippet = nil
             self.centerMapOnLocation(location: marker.position, zoom: self.mapZoom)
             self.mapView.selectedMarker = marker
             self.selectedMarker = marker
             self.viewModel?.getStopInfo(id: markerId as! Int)
         } else {
-            self.showAlert(message: "No hay información disponible")
+            self.showAlert(title: "", message: "No hay información disponible", closeButtonTitle: "Cerrar")
         }
         return true
     }
