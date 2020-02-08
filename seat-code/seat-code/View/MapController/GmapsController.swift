@@ -26,6 +26,16 @@ class GmapsController: BaseViewController, MapControllerProtocol {
     var viewModel: MapViewModel? = MapViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))
     var selectedMarker: GMSMarker = GMSMarker()
     
+    // MARK: - Custom inits
+    
+    public init() {
+        super.init(nibName: "MapViewController", bundle: Bundle(for: GmapsController.self))
+    }
+    
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
     // MARK: View lifecycle
     
     override func viewDidLoad() {

@@ -25,6 +25,8 @@
 		1415810423ECA00E009F9218 /* ContactFormViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810323ECA00E009F9218 /* ContactFormViewController.xib */; };
 		1415810623ECBCE3009F9218 /* ContactFormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810523ECBCE3009F9218 /* ContactFormViewController.swift */; };
 		1415810A23EEAC3B009F9218 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810923EEAC3B009F9218 /* BaseViewController.swift */; };
+		1415810C23EF3D7D009F9218 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810B23EF3D7D009F9218 /* MainViewController.xib */; };
+		1415810E23EF6A81009F9218 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810D23EF6A81009F9218 /* MapViewController.xib */; };
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
@@ -82,6 +84,8 @@
 		1415810323ECA00E009F9218 /* ContactFormViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = ContactFormViewController.xib; sourceTree = "<group>"; };
 		1415810523ECBCE3009F9218 /* ContactFormViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFormViewController.swift; sourceTree = "<group>"; };
 		1415810923EEAC3B009F9218 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		1415810B23EF3D7D009F9218 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
+		1415810D23EF6A81009F9218 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
 		33B1F74E84A33902E41B9D3A /* Pods-seat-codeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.release.xcconfig"; sourceTree = "<group>"; };
 		40087BAB39A5296257128430 /* Pods-seat-codeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2BE8622AB3682129542829 /* Pods-seat-code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.debug.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.debug.xcconfig"; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 			isa = PBXGroup;
 			children = (
 				1415810323ECA00E009F9218 /* ContactFormViewController.xib */,
+				1415810B23EF3D7D009F9218 /* MainViewController.xib */,
+				1415810D23EF6A81009F9218 /* MapViewController.xib */,
 			);
 			path = Xib;
 			sourceTree = "<group>";
@@ -402,8 +408,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				DA38878623E8345E00EDEBFC /* TripTableViewCell.xib in Resources */,
+				1415810C23EF3D7D009F9218 /* MainViewController.xib in Resources */,
 				141580CA23E6CF1F009F9218 /* LaunchScreen.storyboard in Resources */,
 				1415810423ECA00E009F9218 /* ContactFormViewController.xib in Resources */,
+				1415810E23EF6A81009F9218 /* MapViewController.xib in Resources */,
 				141580C723E6CF1F009F9218 /* Assets.xcassets in Resources */,
 				141580C223E6CF1D009F9218 /* Main.storyboard in Resources */,
 			);

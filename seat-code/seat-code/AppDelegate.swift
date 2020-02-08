@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         GMSServices.provideAPIKey(googleApiKey)
+        loadMainViewController()
         return true
     }
 
@@ -91,6 +92,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
         }
+    }
+    
+    func loadMainViewController() {
+        window = UIWindow(frame: UIScreen.main.bounds)
+        let mainViewController = MainViewController()
+
+        mainViewController.initializer(viewModel: MainViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/"))))
+
+        window!.rootViewController = mainViewController
+        window!.makeKeyAndVisible()
     }
 
 }

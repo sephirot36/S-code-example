@@ -25,9 +25,19 @@ class MainViewController: BaseViewController {
 
     // MARK: - Variables
 
-    var viewModel: MainViewModel? = MainViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))
+    var viewModel: MainViewModel?
 
     var mapController: GmapsController!
+
+    // MARK: - Custom inits
+
+    public init() {
+        super.init(nibName: "MainViewController", bundle: Bundle(for: MainViewController.self))
+    }
+
+    public required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
 
     // MARK: Initializer
 
@@ -43,6 +53,7 @@ class MainViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         self.setContainerControllers()
+        self.addButtonActions()
         self.binds()
         self.callbacks()
     }
@@ -50,12 +61,18 @@ class MainViewController: BaseViewController {
     // MARK: Private methods
 
     private func setContainerControllers() {
-        var mapCont: GmapsController? {
-            return children.firstMatchingType()!
-        }
-        self.mapController = mapCont
-        
-        reportButton.addTarget(self, action: #selector(showContactForm), for: .touchUpInside)
+//        var mapCont: GmapsController? {
+//            return children.firstMatchingType()!
+//        }
+//        self.mapController = mapCont
+
+        self.mapController = GmapsController()
+
+        self.mapContainer.addSubview(self.mapController.view)
+    }
+
+    private func addButtonActions() {
+        self.reportButton.addTarget(self, action: #selector(self.showContactForm), for: .touchUpInside)
     }
 
     private func binds() {
@@ -75,22 +92,36 @@ class MainViewController: BaseViewController {
 
         // TODO: SAVE points as CLLocationCoordinate2D when parsing
         self.tableView.rx.modelSelected(Trip.self)
-            .subscribe(onNext: { [weak self] trip in
-                self?.mapController.clearMap()
-                self?.mapController.drawLine(points: trip.coords ?? [])
-                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point._latitude), longitude: CLLocationDegrees(trip.origin.point._longitude)), icon: nil)
-                self?.mapController.createMarkerAtLocation(location: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point._latitude), longitude: CLLocationDegrees(trip.destination.point._longitude)), icon: nil)
-                self?.mapController.centerMapBetweenPoints(origin: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.origin.point._latitude),
-                                                                                          longitude: CLLocationDegrees(trip.origin.point._longitude)), end: CLLocationCoordinate2D(latitude: CLLocationDegrees(trip.destination.point._latitude), longitude: CLLocationDegrees(trip.destination.point._longitude)))
-
-                for stop in trip.stops {
-                    self?.mapController.createMarkerAtLocationWithId(
+            .subscribe(
+                onNext: { [weak self] trip in
+                    self?.mapController.clearMap()
+                    self?.mapController.drawLine(points: trip.coords ?? [])
+                    self?.mapController.createMarkerAtLocation(
                         location: CLLocationCoordinate2D(
-                            latitude: CLLocationDegrees(stop.point?._latitude ?? 0.0),
-                            longitude: CLLocationDegrees(stop.point?._longitude ?? 0.0)),
-                        icon: GMSMarker.markerImage(with: .orange),
-                        id: stop.id ?? -1)
-                }
+                            latitude: CLLocationDegrees(trip.origin.point._latitude),
+                            longitude: CLLocationDegrees(trip.origin.point._longitude)),
+                        icon: nil)
+                    self?.mapController.createMarkerAtLocation(
+                        location: CLLocationCoordinate2D(
+                            latitude: CLLocationDegrees(trip.destination.point._latitude),
+                            longitude: CLLocationDegrees(trip.destination.point._longitude)),
+                        icon: nil)
+                    self?.mapController.centerMapBetweenPoints(
+                        origin: CLLocationCoordinate2D(
+                            latitude: CLLocationDegrees(trip.origin.point._latitude),
+                            longitude: CLLocationDegrees(trip.origin.point._longitude)),
+                        end: CLLocationCoordinate2D(
+                            latitude: CLLocationDegrees(trip.destination.point._latitude),
+                            longitude: CLLocationDegrees(trip.destination.point._longitude)))
+
+                    for stop in trip.stops {
+                        self?.mapController.createMarkerAtLocationWithId(
+                            location: CLLocationCoordinate2D(
+                                latitude: CLLocationDegrees(stop.point?._latitude ?? 0.0),
+                                longitude: CLLocationDegrees(stop.point?._longitude ?? 0.0)),
+                            icon: GMSMarker.markerImage(with: .orange),
+                            id: stop.id ?? -1)
+                    }
             }).disposed(by: self.disposeBag)
     }
 
@@ -119,8 +150,9 @@ class MainViewController: BaseViewController {
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     // MARK: - IBActions
+
     @objc func showContactForm(sender: UIButton!) {
         showVC(vc: ContactFormViewController())
     }

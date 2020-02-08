@@ -26,7 +26,6 @@ class MainViewModel {
     
     init(resourcesApi: ResourcesApi) {
         self.resourcesApi = resourcesApi
-        // subscribes()
         getTrips()
     }
     

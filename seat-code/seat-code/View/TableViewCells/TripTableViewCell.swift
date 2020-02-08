@@ -61,7 +61,6 @@ class TripTableViewCell: UITableViewCell {
     
     private func getTripInfo(trip: Trip) -> NSMutableAttributedString {
         
-        // TODO : CHECK IF INFO IS CORRECT :S
         let startTime = trip.startTime.toString(dateFormat: "HH:mm")
         
         let timeDifference = self.getTimeDifference(start: trip.startTime, end: trip.endTime)
