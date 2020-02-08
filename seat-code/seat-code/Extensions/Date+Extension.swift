@@ -17,6 +17,8 @@ extension Date {
 
     func toString(dateFormat format: String) -> String {
         let dateFormatter = DateFormatter()
+        dateFormatter.timeZone = TimeZone(identifier: "Europe/London")
+        dateFormatter.locale = Locale(identifier: "en_US")
         dateFormatter.dateFormat = format
         return dateFormatter.string(from: self)
     }
