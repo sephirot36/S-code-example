@@ -55,7 +55,7 @@ class GmapsController: BaseViewController, MapControllerProtocol {
                 let extraAction = UIAlertAction(title: "Reportar incidencia", style: .default) { (_: UIAlertAction) in
                     self.showVC(vc: ContactFormViewController())
                 }
-                self.showAlertWithAction(message: requestError, closeButtonTitle: "Cerrar", extraAction: extraAction)
+                self.showAlertWithAction(title: "Algo ha sucedido", message: requestError, closeButtonTitle: "Cerrar", extraAction: extraAction)
                 // self.showAlert(message: requestError, closeButtonTitle: "Cerrar" )
             }).disposed(by: self.disposeBag)
     }
@@ -153,7 +153,7 @@ extension GmapsController: GMSMapViewDelegate {
             self.selectedMarker = marker
             self.viewModel?.getStopInfo(id: markerId as! Int)
         } else {
-            self.showAlert(message: "No hay información disponible", closeButtonTitle: "Cerrar")
+            self.showAlert(title: "Algo ha sucedido", message: "No hay información disponible", closeButtonTitle: "Cerrar")
         }
         return true
     }

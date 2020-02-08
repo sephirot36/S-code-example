@@ -13,21 +13,21 @@ class BaseViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-    func showAlert(message: String, closeButtonTitle: String) {
-        let alert = UIAlertController(title: "Algo ha sucedido", message: message, preferredStyle: .alert)
+    func showAlert(title: String, message: String, closeButtonTitle: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: closeButtonTitle, style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
     }
-    
-    func showAlertWithAction(message: String, closeButtonTitle: String, extraAction: UIAlertAction) {
-        let alert = UIAlertController(title: "Algo ha sucedido", message: message, preferredStyle: .alert)
+
+    func showAlertWithAction(title: String, message: String, closeButtonTitle: String, extraAction: UIAlertAction) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
         let closeAction = UIAlertAction(title: closeButtonTitle, style: .default, handler: nil)
         alert.addAction(extraAction)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
     }
-    
+
     func showVC(vc: UIViewController) {
         self.show(vc, sender: nil)
     }

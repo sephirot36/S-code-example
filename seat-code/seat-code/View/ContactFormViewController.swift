@@ -95,6 +95,13 @@ class ContactFormViewController: BaseViewController {
         application.applicationIconBadgeNumber = issues.count
     }
     
+    private func showSuccess() {
+        let extraAction = UIAlertAction(title: "Volver", style: .default) { (_: UIAlertAction) in
+            self.closeView()
+        }
+        self.showAlertWithAction(title: "Solicitud enviada correctamente", message: "Gracias por informarnos del problema", closeButtonTitle: "Cerrar", extraAction: extraAction)
+    }
+    
     // MARK: - IBActions
     
     @objc func cancelAction(sender: UIButton!) {
@@ -111,8 +118,9 @@ class ContactFormViewController: BaseViewController {
             issue.userIssueDescription = inputDescription.text ?? ""
             saveIssue(issue: issue)
             updateBadge()
+             showSuccess()
         } else {
-            showAlert(message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
+            showAlert(title: "", message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
         }
     }
 }
