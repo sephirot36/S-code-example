@@ -9,7 +9,7 @@
 import RealmSwift
 import UIKit
 
-class ContactFormViewController: UIViewController {
+class ContactFormViewController: BaseViewController {
     // MARK: - Constants
     
     let maxDescriptionChars: Int = 200
@@ -66,10 +66,6 @@ class ContactFormViewController: UIViewController {
         try! realm.commitWrite()
     }
     
-    private func closeView() {
-        dismiss(animated: true, completion: nil)
-    }
-    
     private func checkEmptyString(string: String?) -> Bool {
         guard let string = string else {
             return false
@@ -78,7 +74,6 @@ class ContactFormViewController: UIViewController {
     }
     
     private func isValidForm() -> Bool {
-        
         let validName = checkEmptyString(string: inputName.text)
         let validSurname = checkEmptyString(string: inputSurname.text)
         // TODO: Check correct email syntax with RegEx
@@ -92,18 +87,10 @@ class ContactFormViewController: UIViewController {
         }
     }
     
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
-        alert.addAction(closeAction)
-        self.present(alert, animated: true, completion: nil)
-    }
-    
     private func updateBadge() {
         let issues = realm.objects(Issue.self)
         let application = UIApplication.shared
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil
-        ))
+        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil))
         
         application.applicationIconBadgeNumber = issues.count
     }
@@ -122,10 +109,10 @@ class ContactFormViewController: UIViewController {
             issue.userEmail = inputMail.text ?? ""
             issue.userPhone = inputPhone.text ?? ""
             issue.userIssueDescription = inputDescription.text ?? ""
-            self.saveIssue(issue: issue)
-            self.updateBadge()
+            saveIssue(issue: issue)
+            updateBadge()
         } else {
-            self.showAlert(message: "Debes rellenar los campos obligatorios")
+            showAlert(message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
         }
     }
 }

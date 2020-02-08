@@ -11,7 +11,7 @@ import RxCocoa
 import RxSwift
 import UIKit
 
-class MainViewController: UIViewController {
+class MainViewController: BaseViewController {
     // MARK: - @IBOutlets
 
     @IBOutlet var mapContainer: UIView!
@@ -115,14 +115,14 @@ class MainViewController: UIViewController {
 
     private func showAlert(message: String) {
         let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Close", style: .default, handler: nil)
+        let closeAction = UIAlertAction(title: "Cerrar", style: .default, handler: nil)
         alert.addAction(closeAction)
         self.present(alert, animated: true, completion: nil)
     }
     
     // MARK: - IBActions
     @objc func showContactForm(sender: UIButton!) {
-        self.show(ContactFormViewController(), sender: nil)
+        showVC(vc: ContactFormViewController())
     }
 }
 
