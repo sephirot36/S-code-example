@@ -13,5 +13,7 @@ class Issue: Object {
     @objc dynamic var userSurname = ""
     @objc dynamic var userEmail = ""
     @objc dynamic var userPhone = ""
+    @objc dynamic var issueDate = ""
+    @objc dynamic var issueHour = ""
     @objc dynamic var userIssueDescription = ""
 }
