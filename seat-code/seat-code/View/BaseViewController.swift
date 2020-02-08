@@ -20,11 +20,13 @@ class BaseViewController: UIViewController {
         self.present(alert, animated: true, completion: nil)
     }
 
-    func showAlertWithAction(title: String, message: String, closeButtonTitle: String, extraAction: UIAlertAction) {
+    func showAlertWithAction(title: String, message: String, closeButtonTitle: String? = nil, extraAction: UIAlertAction) {
         let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: closeButtonTitle, style: .default, handler: nil)
         alert.addAction(extraAction)
-        alert.addAction(closeAction)
+        if let closeTitle = closeButtonTitle {
+            let closeAction = UIAlertAction(title: closeTitle, style: .default, handler: nil)
+            alert.addAction(closeAction)
+        }
         self.present(alert, animated: true, completion: nil)
     }
 

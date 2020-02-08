@@ -23,6 +23,8 @@ class ContactFormViewController: BaseViewController {
     @IBOutlet var inputSurname: UITextField!
     @IBOutlet var inputMail: UITextField!
     @IBOutlet var inputPhone: UITextField!
+    @IBOutlet var inputDate: UITextField!
+    @IBOutlet var inputHour: UITextField!
     @IBOutlet var inputDescription: UITextView!
     
     // MARK: - Custom inits
@@ -80,7 +82,12 @@ class ContactFormViewController: BaseViewController {
         let validMail = checkEmptyString(string: inputMail.text)
         let validDesc = checkEmptyString(string: inputDescription.text)
         
-        if validName, validSurname, validMail, validDesc {
+        let validDate = checkEmptyString(string: inputDate.text)
+        let validHour = checkEmptyString(string: inputHour.text)
+        
+        if validName, validSurname,
+            validMail, validDesc,
+            validDate, validHour {
             return true
         } else {
             return false
@@ -99,7 +106,7 @@ class ContactFormViewController: BaseViewController {
         let extraAction = UIAlertAction(title: "Volver", style: .default) { (_: UIAlertAction) in
             self.closeView()
         }
-        self.showAlertWithAction(title: "Solicitud enviada correctamente", message: "Gracias por informarnos del problema", closeButtonTitle: "Cerrar", extraAction: extraAction)
+        showAlertWithAction(title: "Solicitud enviada correctamente", message: "Gracias por informarnos del problema", extraAction: extraAction)
     }
     
     // MARK: - IBActions
@@ -118,7 +125,7 @@ class ContactFormViewController: BaseViewController {
             issue.userIssueDescription = inputDescription.text ?? ""
             saveIssue(issue: issue)
             updateBadge()
-             showSuccess()
+            showSuccess()
         } else {
             showAlert(title: "", message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
         }
