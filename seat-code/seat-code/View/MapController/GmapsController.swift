@@ -19,6 +19,7 @@ class GmapsController: BaseViewController, MapControllerProtocol {
     
     let disposeBag = DisposeBag()
     let mapZoom: Float = 11
+    let loadingText = "Cargando..."
     
     // MARK: - Variables
     
@@ -146,14 +147,14 @@ extension GmapsController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerId = marker.userData {
             marker.tracksInfoWindowChanges = true
-            marker.title = "Cargando..."
+            marker.title = loadingText
             marker.snippet = nil
             self.centerMapOnLocation(location: marker.position, zoom: self.mapZoom)
             self.mapView.selectedMarker = marker
             self.selectedMarker = marker
             self.viewModel?.getStopInfo(id: markerId as! Int)
         } else {
-            self.showAlert(title: "Algo ha sucedido", message: "No hay información disponible", closeButtonTitle: "Cerrar")
+            self.showAlert(title: "", message: "No hay información disponible", closeButtonTitle: "Cerrar")
         }
         return true
     }
