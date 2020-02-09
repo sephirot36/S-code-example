@@ -24,4 +24,6 @@ cd seat-code/seat-code
 ```ruby
 pod install
 ```
+Open the file #### seat-code.xcworkspace
 
+Compile the version and don't be hard with me :)
