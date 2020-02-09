@@ -37,6 +37,7 @@
 		DA38878B23E8577400EDEBFC /* Date+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA38878A23E8577400EDEBFC /* Date+Extension.swift */; };
 		DAEE8F6723F00B1600CBA2F5 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6623F00B1600CBA2F5 /* MainViewModelTests.swift */; };
 		DAEE8F6A23F00BC200CBA2F5 /* DataMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6923F00BC200CBA2F5 /* DataMocks.swift */; };
+		DAEE8F6E23F071B800CBA2F5 /* ResourcesApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */; };
 		DAFB217A23EAC5BC00D4E57B /* MapControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */; };
 		DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217C23EACAC500D4E57B /* GmapsController.swift */; };
 		DAFB217F23EB135F00D4E57B /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217E23EB135F00D4E57B /* Array+Extension.swift */; };
@@ -103,6 +104,7 @@
 		DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_seat_codeUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		DAEE8F6623F00B1600CBA2F5 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		DAEE8F6923F00BC200CBA2F5 /* DataMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMocks.swift; sourceTree = "<group>"; };
+		DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesApiTests.swift; sourceTree = "<group>"; };
 		DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapControllerProtocol.swift; sourceTree = "<group>"; };
 		DAFB217C23EACAC500D4E57B /* GmapsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmapsController.swift; sourceTree = "<group>"; };
 		DAFB217E23EB135F00D4E57B /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -198,6 +200,7 @@
 		141580D323E6CF1F009F9218 /* seat-codeTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAEE8F6C23F0710200CBA2F5 /* Data */,
 				DAEE8F6B23F00CB600CBA2F5 /* Model */,
 				DAEE8F6823F00BA500CBA2F5 /* Mocks */,
 				141580D423E6CF1F009F9218 /* seat_codeTests.swift */,
@@ -311,6 +314,14 @@
 				DAEE8F6623F00B1600CBA2F5 /* MainViewModelTests.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		DAEE8F6C23F0710200CBA2F5 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 		E7FDC1BA30B2B767918953B3 /* Frameworks */ = {
@@ -615,6 +626,7 @@
 			files = (
 				141580D523E6CF1F009F9218 /* seat_codeTests.swift in Sources */,
 				DAEE8F6723F00B1600CBA2F5 /* MainViewModelTests.swift in Sources */,
+				DAEE8F6E23F071B800CBA2F5 /* ResourcesApiTests.swift in Sources */,
 				DAEE8F6A23F00BC200CBA2F5 /* DataMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

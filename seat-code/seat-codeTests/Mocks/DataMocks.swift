@@ -26,8 +26,10 @@ class ResourcesApiMock: ResourcesApi {
 }
 
 class NetworkProviderMock: NetworkProvider {
+    var getDataCalled: Bool = false
     var returnResult: DataResult = DataResult.failure(DataError.notFound)
     override func getData(completion: @escaping (DataResult) -> Void) {
+        getDataCalled = true
         completion(returnResult)
     }
 }
