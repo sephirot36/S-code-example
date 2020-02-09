@@ -49,6 +49,9 @@ class GmapsController: BaseViewController, MapControllerProtocol {
         // Do any additional setup after loading the view.
         self.mapView.delegate = self
         self.callbacks()
+        // TODO: Center on user's location????
+        // Center map in Bcn coords
+        self.centerMapOnLocation(location: CLLocationCoordinate2D(latitude: 41.4021919, longitude: 2.1428796), zoom: mapZoom)
     }
     
     // MARK: Private methods

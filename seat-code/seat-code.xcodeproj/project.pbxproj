@@ -38,6 +38,8 @@
 		DAEE8F6723F00B1600CBA2F5 /* MainViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6623F00B1600CBA2F5 /* MainViewModelTests.swift */; };
 		DAEE8F6A23F00BC200CBA2F5 /* DataMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6923F00BC200CBA2F5 /* DataMocks.swift */; };
 		DAEE8F6E23F071B800CBA2F5 /* ResourcesApiTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */; };
+		DAEE8F7123F07EAC00CBA2F5 /* ContactFormViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F7023F07EAC00CBA2F5 /* ContactFormViewControllerTests.swift */; };
+		DAEE8F7323F0802900CBA2F5 /* ViewModelMocks.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAEE8F7223F0802900CBA2F5 /* ViewModelMocks.swift */; };
 		DAFB217A23EAC5BC00D4E57B /* MapControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */; };
 		DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217C23EACAC500D4E57B /* GmapsController.swift */; };
 		DAFB217F23EB135F00D4E57B /* Array+Extension.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAFB217E23EB135F00D4E57B /* Array+Extension.swift */; };
@@ -105,6 +107,8 @@
 		DAEE8F6623F00B1600CBA2F5 /* MainViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainViewModelTests.swift; sourceTree = "<group>"; };
 		DAEE8F6923F00BC200CBA2F5 /* DataMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataMocks.swift; sourceTree = "<group>"; };
 		DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResourcesApiTests.swift; sourceTree = "<group>"; };
+		DAEE8F7023F07EAC00CBA2F5 /* ContactFormViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFormViewControllerTests.swift; sourceTree = "<group>"; };
+		DAEE8F7223F0802900CBA2F5 /* ViewModelMocks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModelMocks.swift; sourceTree = "<group>"; };
 		DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapControllerProtocol.swift; sourceTree = "<group>"; };
 		DAFB217C23EACAC500D4E57B /* GmapsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GmapsController.swift; sourceTree = "<group>"; };
 		DAFB217E23EB135F00D4E57B /* Array+Extension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extension.swift"; sourceTree = "<group>"; };
@@ -200,6 +204,7 @@
 		141580D323E6CF1F009F9218 /* seat-codeTests */ = {
 			isa = PBXGroup;
 			children = (
+				DAEE8F6F23F07E7A00CBA2F5 /* View */,
 				DAEE8F6C23F0710200CBA2F5 /* Data */,
 				DAEE8F6B23F00CB600CBA2F5 /* Model */,
 				DAEE8F6823F00BA500CBA2F5 /* Mocks */,
@@ -304,6 +309,7 @@
 			isa = PBXGroup;
 			children = (
 				DAEE8F6923F00BC200CBA2F5 /* DataMocks.swift */,
+				DAEE8F7223F0802900CBA2F5 /* ViewModelMocks.swift */,
 			);
 			path = Mocks;
 			sourceTree = "<group>";
@@ -322,6 +328,14 @@
 				DAEE8F6D23F071B800CBA2F5 /* ResourcesApiTests.swift */,
 			);
 			path = Data;
+			sourceTree = "<group>";
+		};
+		DAEE8F6F23F07E7A00CBA2F5 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				DAEE8F7023F07EAC00CBA2F5 /* ContactFormViewControllerTests.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 		E7FDC1BA30B2B767918953B3 /* Frameworks */ = {
@@ -624,9 +638,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAEE8F7123F07EAC00CBA2F5 /* ContactFormViewControllerTests.swift in Sources */,
 				141580D523E6CF1F009F9218 /* seat_codeTests.swift in Sources */,
 				DAEE8F6723F00B1600CBA2F5 /* MainViewModelTests.swift in Sources */,
 				DAEE8F6E23F071B800CBA2F5 /* ResourcesApiTests.swift in Sources */,
+				DAEE8F7323F0802900CBA2F5 /* ViewModelMocks.swift in Sources */,
 				DAEE8F6A23F00BC200CBA2F5 /* DataMocks.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

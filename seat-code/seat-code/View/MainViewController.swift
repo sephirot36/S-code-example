@@ -47,7 +47,6 @@ class MainViewController: BaseViewController {
     }
 
     // TODO: Check Constrains on my phone
-    // TODO: Center on user's location????
 
     // MARK: View lifecycle
 
