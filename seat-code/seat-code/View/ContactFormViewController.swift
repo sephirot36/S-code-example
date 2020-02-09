@@ -55,8 +55,8 @@ class ContactFormViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addActions()
-        setDelegates()
         binds()
+        setDelegates()
         callbacks()
     }
     
@@ -116,7 +116,7 @@ class ContactFormViewController: BaseViewController {
             print("No viewModel defined")
             return
         }
-        if self.isValid {
+        if isValid {
             let issue = Issue()
             issue.userName = inputName.text ?? ""
             issue.userSurname = inputSurname.text ?? ""
@@ -147,6 +147,7 @@ class ContactFormViewController: BaseViewController {
 extension ContactFormViewController: UITextFieldDelegate {
     // MARK: UITextFieldDelegate conformance
     
+    // This it seems it's not working with rx.text.orEmpty.bind
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == inputName {
             textField.resignFirstResponder()

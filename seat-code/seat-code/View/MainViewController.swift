@@ -45,9 +45,7 @@ class MainViewController: BaseViewController {
         self.viewModel = viewModel
         viewModel.getTrips()
     }
-
-    // TODO: Check Constrains on my phone
-
+    
     // MARK: View lifecycle
 
     override func viewDidLoad() {
