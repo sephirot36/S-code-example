@@ -30,5 +30,5 @@ enum DataError: Error {
 // MARK: - Protocol definition
 
 protocol DataProvider {
-     func getData(completion: @escaping (DataResult) -> Void)
+    func getData(completion: @escaping (DataResult) -> Void)
 }

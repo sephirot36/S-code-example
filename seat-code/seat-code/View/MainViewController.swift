@@ -26,7 +26,6 @@ class MainViewController: BaseViewController {
     // MARK: - Variables
 
     var viewModel: MainViewModel?
-
     var mapController: GmapsController!
 
     // MARK: - Custom inits
@@ -45,7 +44,7 @@ class MainViewController: BaseViewController {
         self.viewModel = viewModel
         viewModel.getTrips()
     }
-    
+
     // MARK: View lifecycle
 
     override func viewDidLoad() {
@@ -136,22 +135,15 @@ class MainViewController: BaseViewController {
         viewModel.requestError
             .subscribe(onNext: { [weak self] requestError in
                 guard let `self` = self else { return }
-                self.showAlert(message: requestError)
+                self.showAlert(title: "", message: requestError, closeButtonTitle: "Cerrar")
             }).disposed(by: self.disposeBag)
-    }
-
-    private func showAlert(message: String) {
-        let alert = UIAlertController(title: "", message: message, preferredStyle: .alert)
-        let closeAction = UIAlertAction(title: "Cerrar", style: .default, handler: nil)
-        alert.addAction(closeAction)
-        self.present(alert, animated: true, completion: nil)
     }
 
     // MARK: - IBActions
 
     @objc func showContactForm(sender: UIButton!) {
         let contactVc = ContactFormViewController()
-            contactVc.initializer(viewModel: ContactFormViewModel())
+        contactVc.initializer(viewModel: ContactFormViewModel())
         showVC(vc: contactVc)
     }
 }
