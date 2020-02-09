@@ -28,5 +28,14 @@ Compile the version and don't be hard with me :)
 - About Testing, i tried to test unless one file from each layer: 1 View Controller, 1, 1 View Model, 1 Data Resource
 - I wrote some TODO's as possible improvements, but did not implement them.
 - About the design, it can be better of course, i centered all my effort on the architecture and code.
+- About Pods used:
+    - GoogleMaps: I considered this is the best framework to show map info, even Apple have's their own maps framework, but i tried to implement the architecture to easily change to other maps framework.
+    - RxSwift / RxCocoa: Used to implement observables.
+    - SwiftyJSON: Easy way to manage JSON formats
+    - Alamofire: Used to do network calls
+    - Polyline: Used to decode a route received from the Api.
+    - RealmSwift: Used to easily save objects into memory.
+    Testing pods: 
+    - Quick / Nimble: Easies way to write test
 
 
