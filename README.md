@@ -8,15 +8,15 @@ Steps to compile:
 git clone https://github.com/sephirot36/seat-code.git
 ```
 - write your user credentials if needed.
-- Enter to the folder seat-code/seat-code with the command:
+- Enter to the folder seat-code generated with the command:
 ```ruby
-cd seat-code/seat-code
+cd seat-code/
 ```
-- Install cocoapods:
+- Install cocoapods with this command on the project folder:
 ```ruby
 pod install
 ```
-Open the file #### seat-code.xcworkspace
+Open the file seat-code.xcworkspace
 
 Compile the version and don't be hard with me :)
 
