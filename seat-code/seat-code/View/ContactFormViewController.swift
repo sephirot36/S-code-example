@@ -63,6 +63,8 @@ class ContactFormViewController: BaseViewController {
         inputSurname.delegate = self
         inputMail.delegate = self
         inputPhone.delegate = self
+        inputDate.delegate = self
+        inputHour.delegate = self
         inputDescription.delegate = self
     }
     
@@ -96,13 +98,7 @@ class ContactFormViewController: BaseViewController {
         showAlertWithAction(title: "Solicitud enviada correctamente", message: "Gracias por informarnos del problema", extraAction: extraAction)
     }
     
-    // MARK: - IBActions
-    
-    @objc func cancelAction(sender: UIButton!) {
-        closeView()
-    }
-    
-    @objc func sendAction(sender: UIButton!) {
+    private func sendForm() {
         guard let viewModel = self.viewModel else {
             print("No viewModel defined")
             return
@@ -113,6 +109,8 @@ class ContactFormViewController: BaseViewController {
             issue.userSurname = inputSurname.text ?? ""
             issue.userEmail = inputMail.text ?? ""
             issue.userPhone = inputPhone.text ?? ""
+            issue.issueDate = inputDate.text ?? ""
+            issue.issueHour = inputHour.text ?? ""
             issue.userIssueDescription = inputDescription.text ?? ""
             viewModel.saveIssue(issue: issue)
             viewModel.updateBadge()
@@ -120,6 +118,16 @@ class ContactFormViewController: BaseViewController {
         } else {
             showAlert(title: "", message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
         }
+    }
+    
+    // MARK: - IBActions
+    
+    @objc func cancelAction(sender: UIButton!) {
+        closeView()
+    }
+    
+    @objc func sendAction(sender: UIButton!) {
+        sendForm()
     }
 }
 
@@ -137,7 +145,13 @@ extension ContactFormViewController: UITextFieldDelegate {
             textField.resignFirstResponder()
             inputPhone.becomeFirstResponder()
         } else if textField == inputPhone {
-            inputDescription.resignFirstResponder()
+            textField.resignFirstResponder()
+            inputDate.becomeFirstResponder()
+        } else if textField == inputDate {
+            textField.resignFirstResponder()
+            inputHour.becomeFirstResponder()
+        } else if textField == inputHour {
+            inputDescription.becomeFirstResponder()
         }
         return true
     }
@@ -153,6 +167,7 @@ extension ContactFormViewController: UITextViewDelegate {
         }
         if text == "\n" {
             textView.resignFirstResponder()
+            sendForm()
             return false
         }
         

@@ -18,6 +18,8 @@ target 'seat-code' do
   target 'seat-codeTests' do
     inherit! :search_paths
     # Pods for testing
+    pod 'Quick'
+    pod 'Nimble'
   end
 
   target 'seat-codeUITests' do

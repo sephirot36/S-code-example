@@ -43,6 +43,7 @@ class MainViewController: BaseViewController {
 
     func initializer(viewModel: MainViewModel = MainViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))) {
         self.viewModel = viewModel
+        viewModel.getTrips()
     }
 
     // TODO: Check Constrains on my phone
