@@ -27,6 +27,7 @@
 		1415810A23EEAC3B009F9218 /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415810923EEAC3B009F9218 /* BaseViewController.swift */; };
 		1415810C23EF3D7D009F9218 /* MainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810B23EF3D7D009F9218 /* MainViewController.xib */; };
 		1415810E23EF6A81009F9218 /* MapViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1415810D23EF6A81009F9218 /* MapViewController.xib */; };
+		1415811123EFF6AE009F9218 /* ContactFormViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1415811023EFF6AE009F9218 /* ContactFormViewModel.swift */; };
 		65C33D472CE0E96C68C32CCD /* Pods_seat_codeUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DA8000F99B227E09F9A02020 /* Pods_seat_codeUITests.framework */; };
 		8BB9E36C758D9ECBD21A9FC1 /* Pods_seat_codeTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EA789309F6C3872BCCA40D75 /* Pods_seat_codeTests.framework */; };
 		D76BA60402994454F64C3FDC /* Pods_seat_code.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9FC8112348142E7258AC6BBE /* Pods_seat_code.framework */; };
@@ -86,6 +87,7 @@
 		1415810923EEAC3B009F9218 /* BaseViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		1415810B23EF3D7D009F9218 /* MainViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MainViewController.xib; sourceTree = "<group>"; };
 		1415810D23EF6A81009F9218 /* MapViewController.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = MapViewController.xib; sourceTree = "<group>"; };
+		1415811023EFF6AE009F9218 /* ContactFormViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactFormViewModel.swift; sourceTree = "<group>"; };
 		33B1F74E84A33902E41B9D3A /* Pods-seat-codeTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.release.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.release.xcconfig"; sourceTree = "<group>"; };
 		40087BAB39A5296257128430 /* Pods-seat-codeTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-codeTests.debug.xcconfig"; path = "Target Support Files/Pods-seat-codeTests/Pods-seat-codeTests.debug.xcconfig"; sourceTree = "<group>"; };
 		8D2BE8622AB3682129542829 /* Pods-seat-code.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-seat-code.debug.xcconfig"; path = "Target Support Files/Pods-seat-code/Pods-seat-code.debug.xcconfig"; sourceTree = "<group>"; };
@@ -210,11 +212,12 @@
 		141580ED23E6D11B009F9218 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				DAFB217B23EACAAB00D4E57B /* MapController */,
+				1415810F23EFF671009F9218 /* Protocols */,
 				DA38878423E8343000EDEBFC /* TableViewCells */,
-				141580BE23E6CF1C009F9218 /* MainViewController.swift */,
-				1415810523ECBCE3009F9218 /* ContactFormViewController.swift */,
 				1415810923EEAC3B009F9218 /* BaseViewController.swift */,
+				141580BE23E6CF1C009F9218 /* MainViewController.swift */,
+				DAFB217C23EACAC500D4E57B /* GmapsController.swift */,
+				1415810523ECBCE3009F9218 /* ContactFormViewController.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -224,6 +227,7 @@
 			children = (
 				141580F823E73325009F9218 /* MainViewModel.swift */,
 				DAFB218123EB496800D4E57B /* MapViewModel.swift */,
+				1415811023EFF6AE009F9218 /* ContactFormViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -259,6 +263,14 @@
 			path = Xib;
 			sourceTree = "<group>";
 		};
+		1415810F23EFF671009F9218 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
 		DA38878423E8343000EDEBFC /* TableViewCells */ = {
 			isa = PBXGroup;
 			children = (
@@ -277,15 +289,6 @@
 				DAFB217E23EB135F00D4E57B /* Array+Extension.swift */,
 			);
 			path = Extensions;
-			sourceTree = "<group>";
-		};
-		DAFB217B23EACAAB00D4E57B /* MapController */ = {
-			isa = PBXGroup;
-			children = (
-				DAFB217923EAC5BC00D4E57B /* MapControllerProtocol.swift */,
-				DAFB217C23EACAC500D4E57B /* GmapsController.swift */,
-			);
-			path = MapController;
 			sourceTree = "<group>";
 		};
 		E7FDC1BA30B2B767918953B3 /* Frameworks */ = {
@@ -560,6 +563,7 @@
 				DAFB218823ED841800D4E57B /* Issue.swift in Sources */,
 				DAFB217D23EACAC500D4E57B /* GmapsController.swift in Sources */,
 				DA38878B23E8577400EDEBFC /* Date+Extension.swift in Sources */,
+				1415811123EFF6AE009F9218 /* ContactFormViewModel.swift in Sources */,
 				141580F923E73325009F9218 /* MainViewModel.swift in Sources */,
 				DAFB218223EB496800D4E57B /* MapViewModel.swift in Sources */,
 			);

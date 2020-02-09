@@ -46,6 +46,7 @@ class MainViewController: BaseViewController {
     }
 
     // MARK: - TODO: Check Constrains on my phone
+    // MARK: - TODO: Center on user's location????
 
     // MARK: View lifecycle
 
@@ -154,14 +155,15 @@ class MainViewController: BaseViewController {
     // MARK: - IBActions
 
     @objc func showContactForm(sender: UIButton!) {
-        showVC(vc: ContactFormViewController())
+        let contactVc = ContactFormViewController()
+            contactVc.initializer(viewModel: ContactFormViewModel())
+        showVC(vc: contactVc)
     }
 }
 
 // Extend Controller to perform UITableViewDelegate
 extension MainViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        // TODO: Try to return dynamic height depending of the content of summary
         return 80
     }
 }

@@ -10,10 +10,9 @@ import RealmSwift
 import UIKit
 
 class ContactFormViewController: BaseViewController {
-    // MARK: - Constants
+    // MARK: - Variables
     
-    let maxDescriptionChars: Int = 200
-    let realm = try! Realm()
+    var viewModel: ContactFormViewModel?
     
     // MARK: - @IBOutlets
     
@@ -35,6 +34,12 @@ class ContactFormViewController: BaseViewController {
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    // MARK: Initializer
+    
+    func initializer(viewModel: ContactFormViewModel = ContactFormViewModel()) {
+        self.viewModel = viewModel
     }
     
     // MARK: View lifecycle
@@ -61,29 +66,19 @@ class ContactFormViewController: BaseViewController {
         inputDescription.delegate = self
     }
     
-    private func saveIssue(issue: Issue) {
-        // Save your object
-        realm.beginWrite()
-        realm.add(issue)
-        try! realm.commitWrite()
-    }
-    
-    private func checkEmptyString(string: String?) -> Bool {
-        guard let string = string else {
+    private func isValidForm() -> Bool {
+        guard let viewModel = self.viewModel else {
+            print("No viewModel defined")
             return false
         }
-        return !string.isEmpty
-    }
-    
-    private func isValidForm() -> Bool {
-        let validName = checkEmptyString(string: inputName.text)
-        let validSurname = checkEmptyString(string: inputSurname.text)
+        let validName = viewModel.checkEmptyString(string: inputName.text)
+        let validSurname = viewModel.checkEmptyString(string: inputSurname.text)
         // TODO: Check correct email syntax with RegEx
-        let validMail = checkEmptyString(string: inputMail.text)
-        let validDesc = checkEmptyString(string: inputDescription.text)
-        
-        let validDate = checkEmptyString(string: inputDate.text)
-        let validHour = checkEmptyString(string: inputHour.text)
+        let validMail = viewModel.checkEmptyString(string: inputMail.text)
+        let validDesc = viewModel.checkEmptyString(string: inputDescription.text)
+        // TODO: Check Date & Hour formats
+        let validDate = viewModel.checkEmptyString(string: inputDate.text)
+        let validHour = viewModel.checkEmptyString(string: inputHour.text)
         
         if validName, validSurname,
             validMail, validDesc,
@@ -92,14 +87,6 @@ class ContactFormViewController: BaseViewController {
         } else {
             return false
         }
-    }
-    
-    private func updateBadge() {
-        let issues = realm.objects(Issue.self)
-        let application = UIApplication.shared
-        application.registerUserNotificationSettings(UIUserNotificationSettings(types: .badge, categories: nil))
-        
-        application.applicationIconBadgeNumber = issues.count
     }
     
     private func showSuccess() {
@@ -116,6 +103,10 @@ class ContactFormViewController: BaseViewController {
     }
     
     @objc func sendAction(sender: UIButton!) {
+        guard let viewModel = self.viewModel else {
+            print("No viewModel defined")
+            return
+        }
         if isValidForm() {
             let issue = Issue()
             issue.userName = inputName.text ?? ""
@@ -123,8 +114,8 @@ class ContactFormViewController: BaseViewController {
             issue.userEmail = inputMail.text ?? ""
             issue.userPhone = inputPhone.text ?? ""
             issue.userIssueDescription = inputDescription.text ?? ""
-            saveIssue(issue: issue)
-            updateBadge()
+            viewModel.saveIssue(issue: issue)
+            viewModel.updateBadge()
             showSuccess()
         } else {
             showAlert(title: "", message: "Debes rellenar los campos obligatorios", closeButtonTitle: "Cerrar")
@@ -156,6 +147,10 @@ extension ContactFormViewController: UITextViewDelegate {
     // MARK: UITextViewDelegate conformance
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        guard let viewModel = self.viewModel else {
+            print("No viewModel defined")
+            return false
+        }
         if text == "\n" {
             textView.resignFirstResponder()
             return false
@@ -163,6 +158,6 @@ extension ContactFormViewController: UITextViewDelegate {
         
         let newText = (textView.text as NSString).replacingCharacters(in: range, with: text)
         let numberOfChars = newText.count
-        return numberOfChars < maxDescriptionChars
+        return numberOfChars < viewModel.maxDescriptionChars
     }
 }

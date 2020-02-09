@@ -64,7 +64,9 @@ class GmapsController: BaseViewController, MapControllerProtocol {
                 guard let `self` = self else { return }
                 self.clearMarkerInfo()
                 let extraAction = UIAlertAction(title: "Reportar incidencia", style: .default) { (_: UIAlertAction) in
-                    self.showVC(vc: ContactFormViewController())
+                    let contactVc = ContactFormViewController()
+                    contactVc.initializer(viewModel: ContactFormViewModel())
+                    self.showVC(vc: contactVc)
                 }
                 self.showAlertWithAction(title: "Algo ha sucedido", message: requestError, closeButtonTitle: "Cerrar", extraAction: extraAction)
                 // self.showAlert(message: requestError, closeButtonTitle: "Cerrar" )
@@ -157,7 +159,7 @@ extension GmapsController: GMSMapViewDelegate {
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerId = marker.userData {
             marker.tracksInfoWindowChanges = true
-            marker.title = loadingText
+            marker.title = self.loadingText
             marker.snippet = nil
             self.centerMapOnLocation(location: marker.position, zoom: self.mapZoom)
             self.mapView.selectedMarker = marker
