@@ -7,12 +7,37 @@
 //
 import RealmSwift
 import UserNotifications
+import RxSwift
+import RxCocoa
 
 class ContactFormViewModel {
     // MARK: - Constants
     
     let maxDescriptionChars: Int = 200
     let realm = try! Realm()
+    
+    // MARK: - Variables
+    
+    var inputUsername = BehaviorRelay<String>(value: "")
+    var inputUserSurname = BehaviorRelay<String>(value: "")
+    var inputMail = BehaviorRelay<String>(value: "")
+    var inputPhone = BehaviorRelay<String>(value: "")
+    var inputIssueDate = BehaviorRelay<String>(value: "")
+    var inputIssueHour = BehaviorRelay<String>(value: "")
+    var inputIssueDesc = BehaviorRelay<String>(value: "")
+    
+    var isValid: Observable<Bool> {
+        return Observable<Bool>.combineLatest(inputUsername.asObservable(),
+                                              inputUserSurname.asObservable(),
+                                              inputMail.asObservable(),
+                                              inputIssueDate.asObservable(),
+                                              inputIssueHour.asObservable(),
+                                              inputIssueDesc.asObservable(),
+                                              resultSelector: { (username, surname, mail, date, hour, desc) -> Bool in
+            (!username.isEmpty &&  !surname.isEmpty &&
+            !mail.isEmpty &&  !date.isEmpty &&
+            !hour.isEmpty &&  !desc.isEmpty) })
+    }
     
     public func saveIssue(issue: Issue) {
         // Save your object

@@ -67,12 +67,28 @@ class ContactFormViewControllerTests: QuickSpec {
             
             context("when send with mandatory fields filled") {
                 it("should call viewModel saveIssue") {
+                    
+                    guard let viewModel = subject.viewModel else {
+                        print("No vieModel")
+                        return
+                    }
+                    
                     subject.inputName.text = "inputName"
                     subject.inputSurname.text = "inputSurname"
                     subject.inputMail.text = "inputMail"
                     subject.inputDate.text = "inputDate"
                     subject.inputHour.text = "inputHour"
                     subject.inputDescription.text = "inputDescription"
+                    
+                    
+                    subject.inputName.sendActions(for: .editingChanged)
+                    subject.inputSurname.sendActions(for: .editingChanged)
+                    subject.inputMail.sendActions(for: .editingChanged)
+                    subject.inputDate.sendActions(for: .editingChanged)
+                    subject.inputHour.sendActions(for: .editingChanged)
+                    // UITextView does not have .sendActions(for: .editingChanged) so force the value
+                    viewModel.inputIssueDesc.accept("inputDescription\n")
+                    
                     
                     subject.sendButton.sendActions(for: .touchUpInside)
                     expect(viewModelMock.saveIssueCalled).to(beTrue())
