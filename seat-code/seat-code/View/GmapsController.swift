@@ -23,7 +23,7 @@ class GmapsController: BaseViewController, MapControllerProtocol {
     
     // MARK: - Variables
     
-    var viewModel: MapViewModel? = MapViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))
+    var viewModel: MapViewModel?
     var selectedMarker: GMSMarker = GMSMarker()
     
     // MARK: - Custom inits
@@ -34,6 +34,12 @@ class GmapsController: BaseViewController, MapControllerProtocol {
     
     public required init?(coder: NSCoder) {
         super.init(coder: coder)
+    }
+    
+    // MARK: Initializer
+    
+    func initializer(viewModel: MapViewModel = MapViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/")))) {
+        self.viewModel = viewModel
     }
     
     // MARK: View lifecycle
@@ -156,6 +162,7 @@ class GmapsController: BaseViewController, MapControllerProtocol {
 }
 
 extension GmapsController: GMSMapViewDelegate {
+    // TODO: Try to add custom UIView to the infoWindow
     func mapView(_ mapView: GMSMapView, didTap marker: GMSMarker) -> Bool {
         if let markerId = marker.userData {
             marker.tracksInfoWindowChanges = true
