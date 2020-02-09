@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" rowHeight="81" id="dS2-xC-16j" customClass="TripTableViewCell" customModule="seat_code" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="414" height="80"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="dS2-xC-16j" id="rgH-j9-Xjd">
+                <rect key="frame" x="0.0" y="0.0" width="414" height="79.5"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" alignment="top" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="Of8-Rb-jp9">
+                        <rect key="frame" x="20" y="15" width="374" height="54.5"/>
+                        <subviews>
+                            <stackView opaque="NO" contentMode="scaleToFill" spacing="24" translatesAutoresizingMaskIntoConstraints="NO" id="sFA-vJ-QOs">
+                                <rect key="frame" x="0.0" y="0.0" width="72.5" height="14"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h9c-bn-Dgs">
+                                        <rect key="frame" x="0.0" y="0.0" width="14" height="14"/>
+                                        <color key="backgroundColor" red="0.5568627451" green="0.5568627451" blue="0.57647058819999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" secondItem="h9c-bn-Dgs" secondAttribute="height" multiplier="1:1" id="jU4-ie-gAG"/>
+                                            <constraint firstAttribute="width" constant="14" id="xIv-jz-kdH"/>
+                                        </constraints>
+                                    </view>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Oc2-Mv-acr">
+                                        <rect key="frame" x="38" y="0.0" width="34.5" height="14"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="16"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" usesAttributedText="YES" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="OAb-Di-8Cq">
+                                <rect key="frame" x="0.0" y="34" width="83" height="20.5"/>
+                                <attributedString key="attributedText">
+                                    <fragment content="Description">
+                                        <attributes>
+                                            <font key="NSFont" size="16" name=".AppleSystemUIFont"/>
+                                            <paragraphStyle key="NSParagraphStyle" alignment="left" lineBreakMode="wordWrapping" baseWritingDirection="natural" tighteningFactorForTruncation="0.0"/>
+                                        </attributes>
+                                    </fragment>
+                                </attributedString>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                    </stackView>
+                </subviews>
+                <constraints>
+                    <constraint firstItem="Of8-Rb-jp9" firstAttribute="leading" secondItem="rgH-j9-Xjd" secondAttribute="leading" constant="20" id="1Ws-KX-j9m"/>
+                    <constraint firstAttribute="bottom" secondItem="Of8-Rb-jp9" secondAttribute="bottom" constant="10" id="S8m-wK-NKu"/>
+                    <constraint firstItem="Of8-Rb-jp9" firstAttribute="top" secondItem="rgH-j9-Xjd" secondAttribute="top" constant="15" id="dE2-Wb-glF"/>
+                    <constraint firstAttribute="trailing" secondItem="Of8-Rb-jp9" secondAttribute="trailing" constant="20" id="xOA-Sj-IEU"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="tripDescription" destination="Oc2-Mv-acr" id="LgJ-S8-DxQ"/>
+                <outlet property="tripInfo" destination="OAb-Di-8Cq" id="8r2-cb-OC4"/>
+                <outlet property="tripStatus" destination="h9c-bn-Dgs" id="Bef-1a-EIe"/>
+            </connections>
+            <point key="canvasLocation" x="18.840579710144929" y="10.714285714285714"/>
+        </tableViewCell>
+    </objects>
+</document>
