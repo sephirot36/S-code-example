@@ -45,8 +45,8 @@ class MainViewController: BaseViewController {
         self.viewModel = viewModel
     }
 
-    // MARK: - TODO: Check Constrains on my phone
-    // MARK: - TODO: Center on user's location????
+    // TODO: Check Constrains on my phone
+    // TODO: Center on user's location????
 
     // MARK: View lifecycle
 
@@ -62,12 +62,9 @@ class MainViewController: BaseViewController {
     // MARK: Private methods
 
     private func setContainerControllers() {
-//        var mapCont: GmapsController? {
-//            return children.firstMatchingType()!
-//        }
-//        self.mapController = mapCont
-
-        self.mapController = GmapsController()
+        let mapVc = GmapsController()
+        mapVc.initializer(viewModel: MapViewModel(resourcesApi: ResourcesApi(dataProvider: NetworkProvider(baseURL: "https://europe-west1-metropolis-fe-test.cloudfunctions.net/api/"))))
+        self.mapController = mapVc
 
         self.mapContainer.addSubview(self.mapController.view)
     }
