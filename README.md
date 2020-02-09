@@ -1,13 +1,5 @@
 # seat-code
 
-To compile the code enter on seat-code folder(by terminal) and install pod dependencies with the command 'pod install'
-
-Why I wrote everything in Spanish? Because the Api gives me the info in that language.
-
-```ruby
-
-```
-
 Steps to compile:
 - Create a folder container
 - Via terminal go to the folder.
@@ -27,3 +19,14 @@ pod install
 Open the file #### seat-code.xcworkspace
 
 Compile the version and don't be hard with me :)
+
+
+# Notes
+
+- The project uses MVVM with RxSwift and avoiding Storyboards.
+- I wrote all the "frontend" messages/labels in spanish language because the api give me feedback in spanish, if not it will be a bit weird.
+- About Testing, i tried to test unless one file from each layer: 1 View Controller, 1, 1 View Model, 1 Data Resource
+- I wrote some TODO's as possible improvements, but did not implement them.
+- About the design, it can be better of course, i centered all my effort on the architecture and code.
+
+
