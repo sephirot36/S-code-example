@@ -7,12 +7,19 @@
 //
 
 import RealmSwift
+import RxCocoa
+import RxSwift
 import UIKit
 
 class ContactFormViewController: BaseViewController {
+    // MARK: - Constants
+    
+    let disposeBag = DisposeBag()
+    
     // MARK: - Variables
     
     var viewModel: ContactFormViewModel?
+    var isValid: Bool = false
     
     // MARK: - @IBOutlets
     
@@ -48,7 +55,9 @@ class ContactFormViewController: BaseViewController {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         addActions()
+        binds()
         setDelegates()
+        callbacks()
     }
     
     // MARK: - Private methods
@@ -68,27 +77,31 @@ class ContactFormViewController: BaseViewController {
         inputDescription.delegate = self
     }
     
-    private func isValidForm() -> Bool {
+    private func binds() {
         guard let viewModel = self.viewModel else {
-            print("No viewModel defined")
-            return false
+            print("No viewModel available")
+            return
         }
-        let validName = viewModel.checkEmptyString(string: inputName.text)
-        let validSurname = viewModel.checkEmptyString(string: inputSurname.text)
-        // TODO: Check correct email syntax with RegEx
-        let validMail = viewModel.checkEmptyString(string: inputMail.text)
-        let validDesc = viewModel.checkEmptyString(string: inputDescription.text)
-        // TODO: Check Date & Hour formats
-        let validDate = viewModel.checkEmptyString(string: inputDate.text)
-        let validHour = viewModel.checkEmptyString(string: inputHour.text)
         
-        if validName, validSurname,
-            validMail, validDesc,
-            validDate, validHour {
-            return true
-        } else {
-            return false
+        inputName.rx.text.orEmpty.bind(to: viewModel.inputUsername).disposed(by: disposeBag)
+        inputSurname.rx.text.orEmpty.bind(to: viewModel.inputUserSurname).disposed(by: disposeBag)
+        inputMail.rx.text.orEmpty.bind(to: viewModel.inputMail).disposed(by: disposeBag)
+        inputPhone.rx.text.orEmpty.bind(to: viewModel.inputPhone).disposed(by: disposeBag)
+        inputDate.rx.text.orEmpty.bind(to: viewModel.inputIssueDate).disposed(by: disposeBag)
+        inputHour.rx.text.orEmpty.bind(to: viewModel.inputIssueHour).disposed(by: disposeBag)
+        inputDescription.rx.text.orEmpty.bind(to: viewModel.inputIssueDesc).disposed(by: disposeBag)
+    }
+    
+    private func callbacks() {
+        guard let viewModel = viewModel else {
+            print("No viewModel available")
+            return
         }
+        viewModel.isValid
+            .subscribe(onNext: { [weak self] isValid in
+                guard let `self` = self else { return }
+                self.isValid = isValid
+            }).disposed(by: disposeBag)
     }
     
     private func showSuccess() {
@@ -103,7 +116,7 @@ class ContactFormViewController: BaseViewController {
             print("No viewModel defined")
             return
         }
-        if isValidForm() {
+        if isValid {
             let issue = Issue()
             issue.userName = inputName.text ?? ""
             issue.userSurname = inputSurname.text ?? ""
@@ -134,6 +147,7 @@ class ContactFormViewController: BaseViewController {
 extension ContactFormViewController: UITextFieldDelegate {
     // MARK: UITextFieldDelegate conformance
     
+    // This it seems it's not working with rx.text.orEmpty.bind
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField == inputName {
             textField.resignFirstResponder()

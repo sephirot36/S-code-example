@@ -45,10 +45,7 @@ class MainViewController: BaseViewController {
         self.viewModel = viewModel
         viewModel.getTrips()
     }
-
-    // TODO: Check Constrains on my phone
-    // TODO: Center on user's location????
-
+    
     // MARK: View lifecycle
 
     override func viewDidLoad() {
