@@ -44,7 +44,7 @@ extension CLLocationCoordinate2D: Codable {
         try container.encode(longitude)
         try container.encode(latitude)
     }
-     
+
     public init(from decoder: Decoder) throws {
         var container = try decoder.unkeyedContainer()
         let longitude = try container.decode(CLLocationDegrees.self)

@@ -6,9 +6,9 @@
 //  Copyright © 2020 Sephirot36. All rights reserved.
 //
 import RealmSwift
-import UserNotifications
-import RxSwift
 import RxCocoa
+import RxSwift
+import UserNotifications
 
 class ContactFormViewModel {
     // MARK: - Constants
@@ -34,31 +34,24 @@ class ContactFormViewModel {
                                               inputIssueHour.asObservable(),
                                               inputIssueDesc.asObservable(),
                                               resultSelector: { (username, surname, mail, date, hour, desc) -> Bool in
-            (!username.isEmpty &&  !surname.isEmpty &&
-            !mail.isEmpty &&  !date.isEmpty &&
-            !hour.isEmpty &&  !desc.isEmpty) })
+                                                  !username.isEmpty && !surname.isEmpty &&
+                                                      !mail.isEmpty && !date.isEmpty &&
+                                                      !hour.isEmpty && !desc.isEmpty
+        })
     }
     
     public func saveIssue(issue: Issue) {
-        // Save your object
         realm.beginWrite()
         realm.add(issue)
         try! realm.commitWrite()
-    }
-    
-    public func checkEmptyString(string: String?) -> Bool {
-        guard let string = string else {
-            return false
-        }
-        return !string.isEmpty
     }
     
     public func updateBadge() {
         let issues = realm.objects(Issue.self)
         let application = UIApplication.shared
         UNUserNotificationCenter.current().requestAuthorization(options: [.badge]) {
-            (granted, error) in
-            //Parse errors and track state
+            granted, _ in
+            // Parse errors and track state
             if !granted {
                 print("Permisos denegados para informar de la cantidad de incidencias abiertas")
             }

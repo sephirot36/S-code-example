@@ -28,6 +28,7 @@ class TripTableViewCell: UITableViewCell {
     
     // MARK: - Private methods
     
+    // TODO: Explain somewhere the colours
     private func getStatusIcon(status: RouteStatus) -> UIColor {
         switch status {
         case .ongoing:
@@ -60,14 +61,13 @@ class TripTableViewCell: UITableViewCell {
     }
     
     private func getTripInfo(trip: Trip) -> NSMutableAttributedString {
-        
         let startTime = trip.startTime.toString(dateFormat: "HH:mm")
         
         let timeDifference = self.getTimeDifference(start: trip.startTime, end: trip.endTime)
         
         let boldAttribute = [NSAttributedString.Key.font: UIFont.boldSystemFont(ofSize: 15)]
         let normalAttribute = [NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15)]
-       
+        
         let mutableString = NSMutableAttributedString(string: "Salida: ", attributes: boldAttribute)
         let startTimeString = NSMutableAttributedString(string: startTime, attributes: normalAttribute)
         let separatorString = NSMutableAttributedString(string: " / ", attributes: normalAttribute)
@@ -97,9 +97,9 @@ class TripTableViewCell: UITableViewCell {
     
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
+        
         if selected {
-            contentView.backgroundColor = UIColor.init(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
+            contentView.backgroundColor = UIColor(red: 0.95, green: 0.95, blue: 0.95, alpha: 1)
         } else {
             contentView.backgroundColor = UIColor.clear
         }
