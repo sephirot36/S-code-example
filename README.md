@@ -1,16 +1,16 @@
-# seat-code
+# S-code-example
 
 Steps to compile:
 - Create a folder container
 - Via terminal go to the folder.
 - Use the command:
 ```ruby
-git clone https://github.com/sephirot36/seat-code.git
+git clone https://github.com/sephirot36/S-code-example.git
 ```
 - write your user credentials if needed.
 - Enter to the folder seat-code generated with the command:
 ```ruby
-cd seat-code/
+cd S-code-example/
 ```
 - Install cocoapods with this command on the project folder:
 ```ruby
